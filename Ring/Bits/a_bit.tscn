@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://x5geb3o14wtt"]
+
+[ext_resource type="PackedScene" uid="uid://40noxf1asr7y" path="res://bit.tscn" id="1_dk2rg"]
+
+[node name="A-Bit" instance=ExtResource("1_dk2rg")]
+nomer = "A"
+ring_func = "effect_A"
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color(0.2, 0.701961, 0.8, 1)

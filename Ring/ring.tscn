@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://capbu8qq3btig"]
+
+[ext_resource type="Texture2D" uid="uid://b1klxgh4exu1q" path="res://images/circle.png" id="1_g4nbq"]
+[ext_resource type="Script" path="res://ring.gd" id="2_4ihsh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wx22k"]
+radius = 25.02
+
+[node name="Ring" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.392157)
+texture = ExtResource("1_g4nbq")
+script = ExtResource("2_4ihsh")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Area"]
+shape = SubResource("CircleShape2D_wx22k")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

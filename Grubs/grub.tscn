@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://bibs5qqp6br7w"]
+
+[ext_resource type="Script" path="res://grub.gd" id="1_h8rgy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_adlhb"]
+radius = 25.02
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0upqv"]
+radius = 3.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_br316"]
+font_size = 12
+font_color = Color(0.0117647, 0.0117647, 0.0117647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2d0gq"]
+bg_color = Color(1, 0.0705882, 0.6, 1)
+
+[node name="Grub" type="Node2D"]
+script = ExtResource("1_h8rgy")
+
+[node name="Head" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+
+[node name="Shape" type="CollisionShape2D" parent="Head"]
+visible = false
+shape = SubResource("CircleShape2D_adlhb")
+
+[node name="Tail" type="Node2D" parent="."]
+position = Vector2(70, 0)
+
+[node name="Hand" type="RigidBody2D" parent="Tail"]
+gravity_scale = 0.0
+
+[node name="Shape" type="CollisionShape2D" parent="Tail/Hand"]
+visible = false
+shape = SubResource("CircleShape2D_0upqv")
+
+[node name="Panel" type="Panel" parent="Tail"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="D" type="Node" parent="."]
+
+[node name="Label" type="Label" parent="D"]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "sds"
+label_settings = SubResource("LabelSettings_br316")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Panel" type="Panel" parent="D"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -524.0
+offset_top = -348.0
+offset_right = -520.0
+offset_bottom = -344.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2d0gq")
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Segments" type="Node2D" parent="."]
+
+[node name="FlopTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="FlopTimer" to="." method="_on_flop_timer_timeout"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf167h7tu8uag"]
+
+[ext_resource type="Script" path="res://stage.gd" id="1_idrg0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esvqq"]
+size = Vector2(1176, 665)
+
+[node name="Stage" type="Node2D"]
+script = ExtResource("1_idrg0")
+
+[node name="SpawnArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea"]
+position = Vector2(578, 322.5)
+shape = SubResource("RectangleShape2D_esvqq")
+
+[node name="Bits" type="Node" parent="."]
+
+[connection signal="input_event" from="SpawnArea" to="." method="_on_spawn_area_input_event"]

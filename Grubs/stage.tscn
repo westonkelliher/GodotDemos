@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlybnuprmyd8g"]
+
+[ext_resource type="Texture2D" uid="uid://c1emmnt275bta" path="res://bg.png" id="1_x1psv"]
+[ext_resource type="PackedScene" uid="uid://bibs5qqp6br7w" path="res://grub.tscn" id="2_ffvwa"]
+
+[node name="Stage" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_x1psv")
+centered = false
+
+[node name="Grub" parent="." instance=ExtResource("2_ffvwa")]
+SPEED = 390.0

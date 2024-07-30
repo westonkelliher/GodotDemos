@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbfb0878hcuve"]
+
+[ext_resource type="PackedScene" uid="uid://40noxf1asr7y" path="res://bit.tscn" id="1_g8rsw"]
+[ext_resource type="Texture2D" uid="uid://b3735brak713x" path="res://images/triangle.png" id="2_hppgf"]
+
+[node name="C-Bit" instance=ExtResource("1_g8rsw")]
+nomer = "C"
+ring_func = "effect_C"
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color(0.8, 0.701961, 0.101961, 1)
+texture = ExtResource("2_hppgf")
