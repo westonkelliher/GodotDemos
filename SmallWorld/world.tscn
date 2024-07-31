@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://dobld6rjmphy2"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_kgq6l"]
+[ext_resource type="PackedScene" uid="uid://cylwrkjur2rdw" path="res://player.tscn" id="1_mlsyg"]
+[ext_resource type="SphereMesh" uid="uid://bhe3kpwx2ghuy" path="res://ball.tres" id="1_x2kho"]
+[ext_resource type="Script" path="res://Camera3D.gd" id="2_567kw"]
+[ext_resource type="PackedScene" uid="uid://nu4ymtwinci2" path="res://rock.tscn" id="4_hi2di"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7ndhr"]
+frequency = 0.1
+fractal_octaves = 10
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u7qse"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_7ndhr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rn8m2"]
+metallic = 1.0
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_u7qse")
+subsurf_scatter_enabled = true
+subsurf_scatter_skin_mode = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gqxnl"]
+radius = 10.0
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_kgq6l")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 6)
+script = ExtResource("2_567kw")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+mesh = ExtResource("1_x2kho")
+surface_material_override/0 = SubResource("StandardMaterial3D_rn8m2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+shape = SubResource("SphereShape3D_gqxnl")
+
+[node name="Player" parent="." instance=ExtResource("1_mlsyg")]
+transform = Transform3D(0.999691, -0.0248683, 0, 0.0248683, 0.999691, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 22, 2)
+
+[node name="Rocks" type="Node3D" parent="."]
+
+[node name="Rock" parent="Rocks" instance=ExtResource("4_hi2di")]
+transform = Transform3D(0.776607, 0.303469, 0.552076, 0, -0.876332, 0.481708, 0.629985, -0.374098, -0.680566, -7.72169, 5.33579, -12.1896)
+
+[node name="Rock2" parent="Rocks" instance=ExtResource("4_hi2di")]
+transform = Transform3D(0.669204, -0.269377, 0.692533, 0.432783, 0.898887, -0.068561, -0.60404, 0.345598, 0.718121, 20.3991, 3.41607, -10.3571)
+
+[node name="Rock3" parent="Rocks" instance=ExtResource("4_hi2di")]
+transform = Transform3D(0.111276, -0.0819947, -0.990401, 0.593208, 0.805049, 0, 0.797322, -0.587514, 0.138223, -15.8415, -10.2271, 3.51521)
+
+[node name="Rock4" parent="Rocks" instance=ExtResource("4_hi2di")]
+transform = Transform3D(0.113477, -0.767264, -0.631212, 0.712864, -0.379659, 0.589648, -0.692061, -0.51688, 0.503872, 9.42987, 5.33579, 17.253)
+
+[node name="Rock5" parent="Rocks" instance=ExtResource("4_hi2di")]
+transform = Transform3D(0.682506, 0.723986, -0.100146, -0.343919, 0.43903, 0.830044, 0.644907, -0.532068, 0.548633, 10.8263, -27.7614, 7.74174)

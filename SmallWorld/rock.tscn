@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://nu4ymtwinci2"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cma0h"]
+frequency = 0.0373
+fractal_lacunarity = 1.37
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r6j3o"]
+noise = SubResource("FastNoiseLite_cma0h")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ifq7m"]
+albedo_color = Color(0.654902, 0.662745, 0.780392, 1)
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_r6j3o")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_08w1n"]
+material = SubResource("StandardMaterial3D_ifq7m")
+radius = 1.0
+height = 2.4
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xktbk"]
+radius = 1.0
+height = 2.4
+
+[node name="Rock" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_08w1n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_xktbk")

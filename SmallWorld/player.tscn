@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://cylwrkjur2rdw"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_vc8e8"]
+[ext_resource type="BoxMesh" uid="uid://c67hvj11nvhrw" path="res://lilbox.tres" id="2_ijx21"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3loex"]
+height = 2.08996
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_24efn"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_apuik"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_vc8e8")
+
+[node name="Shape" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_3loex")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_24efn")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.537472, 0, 0, 0, -0.506852, 0.542473, 0, -1.30088, -0.211359, 0, 0.906094, -0.301758)
+mesh = SubResource("TorusMesh_apuik")
+
+[node name="TopSpot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74976, 0)
+visible = false
+
+[node name="Ray1" type="RayCast3D" parent="TopSpot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.73351, 0, 0)
+target_position = Vector3(0, 0, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TopSpot/Ray1"]
+mesh = ExtResource("2_ijx21")
+
+[node name="Ray2" type="RayCast3D" parent="TopSpot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.504047, 0, 0)
+target_position = Vector3(0, 0, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TopSpot/Ray2"]
+mesh = ExtResource("2_ijx21")
+
+[node name="Ray3" type="RayCast3D" parent="TopSpot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74029, 0, 0)
+target_position = Vector3(0, 0, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TopSpot/Ray3"]
+mesh = ExtResource("2_ijx21")
