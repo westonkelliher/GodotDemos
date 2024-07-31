@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://d4xfwmxfsw40"]
+
+[ext_resource type="Script" path="res://primate.gd" id="1_8yvc4"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_6grxj"]
+radius = 0.14
+height = 0.28
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_em04e"]
+radius = 0.14
+
+[sub_resource type="BoxMesh" id="BoxMesh_obwgx"]
+size = Vector3(0.5, 0.7, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jpu0x"]
+size = Vector3(0.5, 0.7, 0.3)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_d5lsl"]
+radius = 0.1
+height = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p1t5r"]
+radius = 0.1
+height = 1.0
+
+[node name="Primate" type="Node3D"]
+script = ExtResource("1_8yvc4")
+
+[node name="Head" type="RigidBody3D" parent="."]
+collision_mask = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+mesh = SubResource("SphereMesh_6grxj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("SphereShape3D_em04e")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Head"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.35, 0)
+node_a = NodePath("../../Torso")
+node_b = NodePath("..")
+
+[node name="Torso" type="RigidBody3D" parent="."]
+collision_mask = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Torso"]
+mesh = SubResource("BoxMesh_obwgx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Torso"]
+shape = SubResource("BoxShape3D_jpu0x")
+
+[node name="ArmLeft" type="RigidBody3D" parent="."]
+transform = Transform3D(0.69884, -0.715278, -3.12658e-08, 0, -4.37114e-08, 1, -0.715278, -0.69884, -3.05473e-08, -0.25, 0.35, 0)
+collision_mask = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ArmLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("CapsuleMesh_d5lsl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArmLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, -1.77636e-15, 0, 1, 0, 0.4, -2.98023e-08)
+shape = SubResource("CapsuleShape3D_p1t5r")
+
+[node name="ArmRight" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.25, 0.35, 0)
+collision_mask = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ArmRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("CapsuleMesh_d5lsl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArmRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("CapsuleShape3D_p1t5r")
+
+[node name="Shoulder" type="Generic6DOFJoint3D" parent="ArmRight"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+node_a = NodePath("../../Torso")
+node_b = NodePath("..")
+angular_limit_x/upper_angle = 1.5708
+angular_limit_x/softness = 16.0
+angular_limit_x/restitution = 0.1
+angular_limit_z/upper_angle = 0.785398
+angular_motor_x/enabled = true
+angular_motor_x/target_velocity = -0.0174533

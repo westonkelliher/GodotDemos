@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxw3af2er36fv"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_p1f61"]
+radius = 0.1
+height = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0lyxt"]
+radius = 0.1
+height = 1.0
+
+[node name="Arm" type="Node3D"]
+
+[node name="ArmLeft" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+collision_mask = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ArmLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("CapsuleMesh_p1f61")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArmLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, -1.77636e-15, 0, 1, 0, 0.4, -2.98023e-08)
+shape = SubResource("CapsuleShape3D_0lyxt")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="."]

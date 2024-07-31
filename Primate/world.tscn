@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://087vqoxq57uh"]
+
+[ext_resource type="PackedScene" uid="uid://d4xfwmxfsw40" path="res://primate.tscn" id="1_3ujdn"]
+[ext_resource type="Script" path="res://addons/control_camera3d/nodes/control_camera_3d.gd" id="1_t6ojo"]
+[ext_resource type="PackedScene" uid="uid://cxw3af2er36fv" path="res://arm.tscn" id="3_1he8q"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gd022"]
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tfror"]
+size = Vector3(10, 0.1, 10)
+
+[node name="World" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+collision_layer = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_gd022")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_tfror")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.894427, 0.447214, 0, -0.447214, 0.894427, 0, 3, 6)
+script = ExtResource("1_t6ojo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, 2.18557e-08, -0.5, 0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, 17, 0)
+
+[node name="Primate" parent="." instance=ExtResource("1_3ujdn")]
+transform = Transform3D(1, -2.99064e-08, 1.46598e-08, -1.5678e-08, 0.930117, 0.367265, 2.64929e-08, -0.367264, 0.930117, 0, 1.39463, 0)
+
+[node name="Arm" parent="." instance=ExtResource("3_1he8q")]
+transform = Transform3D(0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0, 0, 0, 1, -2, 0.504661, 2)
