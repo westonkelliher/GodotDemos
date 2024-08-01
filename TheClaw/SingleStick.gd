@@ -19,6 +19,13 @@ func _process(delta: float) -> void:
 	var arm_x = raw_x / (1 + pow(1 - raw_diff, 1.5)*0.3)
 	var arm_y = raw_y / (1 + pow(1 - raw_diff, 1.5)*0.3)
 	var floor_projection = Vector2(arm_x, arm_y)
+	if floor_projection.length() > 0.85:
+		floor_projection = floor_projection.normalized()*0.85
 	#
-	$D/Projection.target_position = Vector3(arm_x, 0.0, arm_y)
+	var projection_3d = Vector3(floor_projection.x, 0.0, floor_projection.y)
+	$D/Projection.target_position = projection_3d
+	# a^2 + b^2 = c^2  |  a^2 = 1 - b^2  |  a = sqrt(1 - b^2)
+	var vert_len = sqrt(1 - floor_projection.length())
+	var full_3d = Vector3(floor_projection.x, vert_len, floor_projection.y)
+	$D/Normal.target_position = full_3d
 	
