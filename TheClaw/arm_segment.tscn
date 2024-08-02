@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6v2atq3umgbj"]
+
+[ext_resource type="Script" path="res://arm_segment.gd" id="1_bki1k"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mlqbf"]
+radius = 0.1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kmynl"]
+radius = 0.1
+
+[node name="ArmSegment" type="Node3D"]
+script = ExtResource("1_bki1k")
+
+[node name="Arm" type="CharacterBody3D" parent="."]
+rotation_edit_mode = 1
+
+[node name="Shape" type="CollisionShape3D" parent="Arm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_mlqbf")
+
+[node name="Mesh" type="MeshInstance3D" parent="Arm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_kmynl")
+
+[node name="End" type="Marker3D" parent="Arm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)

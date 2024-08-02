@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://c67qniiml4s6b"]
 
-[ext_resource type="PackedScene" uid="uid://cxsj1g5f4t146" path="res://single_stick.tscn" id="1_gvn85"]
+[ext_resource type="PackedScene" uid="uid://bgbyacj7gv4na" path="res://arm.tscn" id="1_x2b7p"]
 
 [node name="World" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2, 3)
+transform = Transform3D(1, 0, 0, 0, 0.99696, 0.07792, 0, -0.07792, 0.99696, 0, 2, 3)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(0.0612372, 0.05, -0.0612372, -0.0353553, 0.0866025, 0.0353553, 0.0707107, -1.49012e-09, 0.0707107, -6, 3, 5)
@@ -15,4 +15,4 @@ spot_range = 17.0
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
 
-[node name="SingleStick" parent="." instance=ExtResource("1_gvn85")]
+[node name="Arm" parent="." instance=ExtResource("1_x2b7p")]

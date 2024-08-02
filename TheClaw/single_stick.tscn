@@ -31,8 +31,11 @@ mesh = SubResource("BoxMesh_anstd")
 
 [node name="D" type="Node" parent="."]
 
+[node name="Target" type="RayCast3D" parent="D"]
+target_position = Vector3(2, -1, 0)
+
 [node name="Projection" type="RayCast3D" parent="D"]
 target_position = Vector3(2, -1, 0)
 
-[node name="Normal" type="RayCast3D" parent="D"]
+[node name="Stick" type="RayCast3D" parent="D"]
 target_position = Vector3(2, -1, 0)

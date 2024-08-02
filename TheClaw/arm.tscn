@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgbyacj7gv4na"]
+
+[ext_resource type="PackedScene" uid="uid://c6v2atq3umgbj" path="res://arm_segment.tscn" id="1_bm0op"]
+
+[node name="Arm" type="Node3D"]
+
+[node name="BaseArm" parent="." instance=ExtResource("1_bm0op")]
+
+[node name="ForeArm" parent="." instance=ExtResource("1_bm0op")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
