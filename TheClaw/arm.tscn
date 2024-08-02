@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgbyacj7gv4na"]
+[gd_scene load_steps=4 format=3 uid="uid://bgbyacj7gv4na"]
 
 [ext_resource type="PackedScene" uid="uid://c6v2atq3umgbj" path="res://arm_segment.tscn" id="1_bm0op"]
 [ext_resource type="Script" path="res://arm.gd" id="1_xw7rn"]
+[ext_resource type="PackedScene" uid="uid://c2m5p2g86rfw1" path="res://claw.tscn" id="3_g7n4c"]
 
 [node name="Arm" type="Node3D"]
 script = ExtResource("1_xw7rn")
@@ -13,3 +14,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 MAX_ANGLE_FROM_STICK = 60.0
 MAX_ANGLE_FROM_TRIG = 80.0
 LENGTH = 0.8
+MAX_ANGULAR_SPEED = 6.0
+MIN_ANGULAR_SPEED = 2.0
+
+[node name="Claw" parent="BaseArm/ForeArm" instance=ExtResource("3_g7n4c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)

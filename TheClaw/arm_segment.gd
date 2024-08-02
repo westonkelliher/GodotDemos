@@ -17,8 +17,8 @@ extends Node3D
 		return LENGTH
 
 
-const MAX_ANGULAR_SPEED := 6.0
-const MIN_ANGULAR_SPEED := 1.0
+@export var MAX_ANGULAR_SPEED := 4.0
+@export var MIN_ANGULAR_SPEED := 1.0
 
 const REMEMBER_THRESHOLD := 0.1
 

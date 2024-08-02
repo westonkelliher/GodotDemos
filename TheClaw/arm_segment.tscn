@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6v2atq3umgbj"]
+[gd_scene load_steps=5 format=3 uid="uid://c6v2atq3umgbj"]
 
 [ext_resource type="Script" path="res://arm_segment.gd" id="1_bki1k"]
 
@@ -7,6 +7,11 @@ radius = 0.1
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kmynl"]
 radius = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vqg6s"]
+top_radius = 0.05
+bottom_radius = 0.06
+height = 0.5
 
 [node name="ArmSegment" type="Node3D"]
 script = ExtResource("1_bki1k")
@@ -24,3 +29,11 @@ mesh = SubResource("CapsuleMesh_kmynl")
 
 [node name="End" type="Marker3D" parent="Arm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="Fins" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0.4, 0)
+mesh = SubResource("CylinderMesh_vqg6s")
+
+[node name="Fins2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-8.74228e-08, 0, 0.5, 0, 1, 0, -2, 0, -2.18557e-08, 0, 0.4, 0)
+mesh = SubResource("CylinderMesh_vqg6s")
