@@ -1,15 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://dji1ll01shjqi"]
+[gd_scene load_steps=6 format=3 uid="uid://dji1ll01shjqi"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_xhb38"]
+[ext_resource type="Script" path="res://ImageSprite.gd" id="1_jd1wq"]
+[ext_resource type="Script" path="res://world.gd" id="1_m0jlx"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xi0ca"]
 viewport_path = NodePath("subviewport")
 
-[node name="World" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_xhb38"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.934658, 0, -0.355547, 0, 1, 0, 0.355547, 0, 0.934658, 0, 0, 0)
-mesh = SubResource("BoxMesh_xhb38")
+[sub_resource type="PrismMesh" id="PrismMesh_6g1lp"]
+left_to_right = 0.3
+size = Vector3(0.6, 0.7, 0.8)
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_m0jlx")
 
 [node name="subviewport" type="SubViewport" parent="."]
 size = Vector2i(64, 64)
@@ -21,5 +25,17 @@ fov = 25.0
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.81977, -0.42782, -0.38072, 0.545463, 0.38072, 0.746674, -0.174494, -0.819769, 0.545463, -4, 5, 2)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ImageSprite" type="Sprite2D" parent="."]
 texture = SubResource("ViewportTexture_xi0ca")
+script = ExtResource("1_jd1wq")
+
+[node name="Subject" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Subject"]
+transform = Transform3D(0.934658, 0, -0.355547, 0, 1, 0, 0.355547, 0, 0.934658, 0, 0, 0)
+mesh = SubResource("BoxMesh_xhb38")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Subject/MeshInstance3D"]
+transform = Transform3D(0.733543, 0.672042, 0.101361, -0.672042, 0.694985, 0.255647, 0.101361, -0.255647, 0.961441, 0.514872, 0.535701, -0.195859)
+mesh = SubResource("PrismMesh_6g1lp")
