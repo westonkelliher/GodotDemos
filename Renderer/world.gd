@@ -38,12 +38,13 @@ func holdon() -> void:
 	var spritesheet_size := Vector2(sprite_size.x * SPRITESHEET_COLUMNS, sprite_size.y * spritesheet_rows)
 	print(spritesheet_size)
 	var spritesheet := Image.new()
-	spritesheet = spritesheet.create(spritesheet_size.x, spritesheet_size.y, false, Image.FORMAT_RGB8)
+	spritesheet = spritesheet.create(spritesheet_size.x, spritesheet_size.y, false, Image.FORMAT_RGBA8)
 
 	for i in range(IMAGE_COUNT):
 		# Rotate the mesh
-		var angle := 2*PI*i / 16.0
-		$Subject.rotation.y = angle
+		#var angle := 2*PI*i / 16.0
+		#$Subject.rotation.y = angle
+		$Subject/Tree.set_animation(i/16.0)
 
 		# Update the viewport
 		await get_tree().process_frame
@@ -51,9 +52,8 @@ func holdon() -> void:
 		# Capture the image from the viewport
 		var texture := viewport.get_texture()
 		var image := texture.get_image()
-		print(image.get_format())
-		var title := "img_"+str(int(angle*180/PI))
-		image.save_png("res://renders/"+title+".png")
+		#var title := "img_"+str(i)
+		#image.save_png("res://renders/"+title+".png")
 
 		# Calculate the position to place the image in the spritesheet
 		var row := i / SPRITESHEET_COLUMNS
@@ -72,3 +72,7 @@ func holdon() -> void:
 		print("Spritesheet saved successfully.")
 	else:
 		print("Error saving spritesheet: ", error)
+
+
+func populate_sprite_row(row: int, anim_progress: float) -> void:
+	pass

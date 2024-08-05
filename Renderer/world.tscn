@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dji1ll01shjqi"]
+[gd_scene load_steps=8 format=3 uid="uid://dji1ll01shjqi"]
 
 [ext_resource type="Script" path="res://ImageSprite.gd" id="1_jd1wq"]
 [ext_resource type="Script" path="res://world.gd" id="1_m0jlx"]
+[ext_resource type="PackedScene" uid="uid://d25hg1qkrmlby" path="res://tree.tscn" id="3_b6tew"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xi0ca"]
 viewport_path = NodePath("subviewport")
@@ -12,18 +13,27 @@ viewport_path = NodePath("subviewport")
 left_to_right = 0.3
 size = Vector3(0.6, 0.7, 0.8)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_n0l8h"]
+viewport_path = NodePath("subviewport")
+
 [node name="World" type="Node3D"]
 script = ExtResource("1_m0jlx")
 
-[node name="subviewport" type="SubViewport" parent="."]
-size = Vector2i(64, 64)
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7733, -0.0360246, -6.61785)
 
-[node name="Camera3D" type="Camera3D" parent="subviewport"]
-transform = Transform3D(1, 0, 0, 0, 0.469472, 0.882948, 0, -0.882948, 0.469472, 0, 4, 2)
-fov = 25.0
+[node name="subviewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(128, 128)
+
+[node name="Node3D" type="Node3D" parent="subviewport"]
+
+[node name="Camera3D" type="Camera3D" parent="subviewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.987628, -0.156814, 0, 0.156814, 0.987628, 0, 0, 4)
+fov = 35.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.81977, -0.42782, -0.38072, 0.545463, 0.38072, 0.746674, -0.174494, -0.819769, 0.545463, -4, 5, 2)
+transform = Transform3D(0.75491, 0.163859, -0.635029, 0.545463, 0.380721, 0.746674, 0.364118, -0.910056, 0.198031, -4, 5, 2)
 
 [node name="ImageSprite" type="Sprite2D" parent="."]
 texture = SubResource("ViewportTexture_xi0ca")
@@ -33,9 +43,17 @@ script = ExtResource("1_jd1wq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Subject"]
 transform = Transform3D(0.934658, 0, -0.355547, 0, 1, 0, 0.355547, 0, 0.934658, 0, 0, 0)
+visible = false
 mesh = SubResource("BoxMesh_xhb38")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Subject/MeshInstance3D"]
 transform = Transform3D(0.733543, 0.672042, 0.101361, -0.672042, 0.694985, 0.255647, 0.101361, -0.255647, 0.961441, 0.514872, 0.535701, -0.195859)
 mesh = SubResource("PrismMesh_6g1lp")
+
+[node name="Tree" parent="Subject" instance=ExtResource("3_b6tew")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.767, -0.111835, -11.7695)
+texture = SubResource("ViewportTexture_n0l8h")

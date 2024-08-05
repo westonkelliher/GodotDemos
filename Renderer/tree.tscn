@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://d25hg1qkrmlby"]
+
+[ext_resource type="PackedScene" uid="uid://bn3ietp4pooh4" path="res://tree.glb" id="1_2qrqp"]
+[ext_resource type="Script" path="res://tree.gd" id="2_5tjs3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ghsok"]
+diffuse_mode = 3
+albedo_color = Color(0.403922, 0.52549, 0.227451, 1)
+roughness = 0.3
+normal_scale = 3.45
+
+[node name="Tree" instance=ExtResource("1_2qrqp")]
+script = ExtResource("2_5tjs3")
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/rotation = Quaternion(0.0605988, 0.0396204, 0.111902, 0.991078)
+bones/1/rotation = Quaternion(-0.188135, -0.0579687, 0.276111, 0.940748)
+bones/2/rotation = Quaternion(0.107662, -0.0246895, 0.239165, 0.964676)
+bones/3/rotation = Quaternion(-0.138399, -0.0502671, -0.197606, 0.96916)
+bones/4/rotation = Quaternion(0.219642, 0.00570422, 0.0664303, 0.973299)
+bones/5/rotation = Quaternion(0.172729, -0.145814, -0.232672, 0.945921)
+bones/6/rotation = Quaternion(0.0382714, 0.376887, 0.0502732, 0.924102)
+bones/7/rotation = Quaternion(0.123771, 0.0957171, 0.154678, 0.975497)
+bones/8/rotation = Quaternion(0.0677503, 0.167446, 0.162695, 0.970001)
+
+[node name="Cube" parent="Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ghsok")
+
+[node name="AnimationPlayer" parent="." index="1"]
+speed_scale = 0.0
