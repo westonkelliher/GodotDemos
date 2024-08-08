@@ -1,0 +1,96 @@
+[gd_scene load_steps=7 format=3 uid="uid://datptccuqeb7s"]
+
+[ext_resource type="Texture2D" uid="uid://conihd2kfco7m" path="res://sword.png" id="1_gr48y"]
+[ext_resource type="Script" path="res://HitBox.gd" id="2_36lnr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ha3c4"]
+radius = 37.6644
+height = 230.0
+
+[sub_resource type="Animation" id="Animation_8us50"]
+resource_name = "slash"
+length = 0.666673
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.2, 0.333333, 0.666667),
+"transitions": PackedFloat32Array(1.8025, 1.68179, 0.366021, 1.31951, 1.41421),
+"update": 0,
+"values": [1.5708, 1.91986, -0.174533, -0.349066, 1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/HitBox:monitorable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_bhvnn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/HitBox:monitorable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jrdnr"]
+_data = {
+"RESET": SubResource("Animation_bhvnn"),
+"slash": SubResource("Animation_8us50")
+}
+
+[node name="Sword" type="Node2D"]
+position = Vector2(-1, -1)
+rotation = 1.5708
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0, -36)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_gr48y")
+
+[node name="HitBox" type="Area2D" parent="Sprite"]
+monitoring = false
+monitorable = false
+script = ExtResource("2_36lnr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/HitBox"]
+position = Vector2(-4.36092e-06, -12.5)
+rotation = -0.00240117
+shape = SubResource("CapsuleShape2D_ha3c4")
+debug_color = Color(0.733333, 0.435294, 0.498039, 0.419608)
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jrdnr")
+}

@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://cm38d8ufsnxgx"]
+
+[ext_resource type="Script" path="res://guy.gd" id="1_f8j8c"]
+[ext_resource type="Texture2D" uid="uid://jybaqel04xyd" path="res://guy.png" id="1_kymau"]
+[ext_resource type="Script" path="res://HurtBox.gd" id="2_lehs3"]
+
+[sub_resource type="Animation" id="Animation_bw75y"]
+resource_name = "hit"
+length = 0.266673
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.116667, 0.183333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.24, 0.16), Vector2(0.17, 0.23), Vector2(0.22, 0.18), Vector2(0.21, 0.19), Vector2(0.2, 0.2)]
+}
+
+[sub_resource type="Animation" id="Animation_w156w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m2kfr"]
+_data = {
+"RESET": SubResource("Animation_w156w"),
+"hit": SubResource("Animation_bw75y")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iuj48"]
+radius = 220.907
+
+[node name="Guy" type="Node2D"]
+script = ExtResource("1_f8j8c")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_kymau")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m2kfr")
+}
+
+[node name="HurtBox" type="Area2D" parent="."]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("2_lehs3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_iuj48")
+debug_color = Color(0.329412, 0.6, 0.47451, 0.419608)
