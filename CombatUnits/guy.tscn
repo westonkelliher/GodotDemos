@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cm38d8ufsnxgx"]
+[gd_scene load_steps=8 format=3 uid="uid://c3llbbs11olsu"]
 
-[ext_resource type="Script" path="res://guy.gd" id="1_f8j8c"]
 [ext_resource type="Texture2D" uid="uid://jybaqel04xyd" path="res://guy.png" id="1_kymau"]
 [ext_resource type="Script" path="res://HurtBox.gd" id="2_lehs3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4vupe"]
+radius = 41.1096
 
 [sub_resource type="Animation" id="Animation_bw75y"]
 resource_name = "hit"
@@ -42,15 +44,19 @@ _data = {
 "hit": SubResource("Animation_bw75y")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_iuj48"]
-radius = 220.907
+[sub_resource type="CircleShape2D" id="CircleShape2D_editk"]
+radius = 45.0
 
-[node name="Guy" type="Node2D"]
-script = ExtResource("1_f8j8c")
+[node name="Guy" type="RigidBody2D"]
+script = ExtResource("2_lehs3")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_kymau")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_4vupe")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 libraries = {
@@ -58,9 +64,8 @@ libraries = {
 }
 
 [node name="HurtBox" type="Area2D" parent="."]
-scale = Vector2(0.2, 0.2)
 script = ExtResource("2_lehs3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource("CircleShape2D_iuj48")
-debug_color = Color(0.329412, 0.6, 0.47451, 0.419608)
+shape = SubResource("CircleShape2D_editk")
+debug_color = Color(0.278431, 0.631373, 0, 0.419608)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://stage.gd" id="1_7nept"]
 [ext_resource type="PackedScene" uid="uid://datptccuqeb7s" path="res://sword.tscn" id="1_lv071"]
-[ext_resource type="PackedScene" uid="uid://cm38d8ufsnxgx" path="res://guy.tscn" id="2_rjuyv"]
+[ext_resource type="PackedScene" uid="uid://c3llbbs11olsu" path="res://guy.tscn" id="2_rjuyv"]
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_7nept")
@@ -11,4 +11,4 @@ script = ExtResource("1_7nept")
 position = Vector2(303, 251)
 
 [node name="Guy" parent="." instance=ExtResource("2_rjuyv")]
-position = Vector2(338, 157)
+position = Vector2(333, 163)

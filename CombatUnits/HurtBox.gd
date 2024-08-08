@@ -14,4 +14,12 @@ func _on_area_entered(hitbox: HitBox) -> void:
 	if hitbox == null:
 		return
 	if owner.has_method("get_hit"):
-		owner.get_hit(hitbox.damage, hitbox.get_impulse(self))
+		var attack := Attack.new()
+		attack.hitbox = hitbox
+		attack.hurtbox = self
+		owner.get_hit(attack)
+
+
+
+func get_mass_center() -> Vector2:
+	return global_position
