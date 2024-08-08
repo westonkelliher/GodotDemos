@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3llbbs11olsu"]
+[gd_scene load_steps=14 format=3 uid="uid://c3llbbs11olsu"]
 
 [ext_resource type="Texture2D" uid="uid://jybaqel04xyd" path="res://guy.png" id="1_kymau"]
 [ext_resource type="Script" path="res://guy.gd" id="1_mgahl"]
 [ext_resource type="Script" path="res://HurtBox.gd" id="2_lehs3"]
 [ext_resource type="PackedScene" uid="uid://dhnjwp6phamtf" path="res://hand.tscn" id="4_i82hd"]
 [ext_resource type="Texture2D" uid="uid://dulljsgrh3tdu" path="res://hat.png" id="5_fbcmo"]
+[ext_resource type="PackedScene" uid="uid://b2uduvsvbxgja" path="res://health_bar.tscn" id="5_j1w1r"]
 [ext_resource type="Texture2D" uid="uid://rclhgeeerj2y" path="res://hand.png" id="6_d8ogo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jmby7"]
@@ -89,17 +90,27 @@ scale = Vector2(1, -1)
 [node name="HatSpot" type="Marker2D" parent="Body"]
 position = Vector2(-34, 0)
 
-[node name="Animation" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_m2kfr")
-}
+[node name="HealthSpot" type="Marker2D" parent="Body"]
+position = Vector2(0, 51)
+
+[node name="D" type="Node" parent="."]
+
+[node name="HealthBar" parent="D" instance=ExtResource("5_j1w1r")]
+modulate = Color(1, 1, 1, 0.7)
+position = Vector2(0, 51)
 
 [node name="Clothing" type="Sprite2D" parent="."]
 position = Vector2(-33, 0)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("5_fbcmo")
 
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m2kfr")
+}
+
 [node name="Marker2D" type="Marker2D" parent="."]
+visible = false
 position = Vector2(100, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Marker2D"]

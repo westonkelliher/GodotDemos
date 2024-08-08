@@ -2,15 +2,17 @@ class_name Guy
 extends RigidBody2D
 
 #
-enum Team {GRAY, RED, BLUE}
+enum Team {GRAY, RED, BLUE, GREEN}
 static var TeamColors := {
-	Team.GRAY: Color(.8, .8, .8),
-	Team.RED: Color(.9, .4, .35),
-	Team.BLUE: Color(.35, .4, .9),
+	Team.GRAY: Color(.6, .6, .6),
+	Team.RED: Color(.7, .5, .45),
+	Team.BLUE: Color(.45, .5, .7),
+	Team.GREEN: Color(.45, .7, .45)
 }
 
 #
 signal wants_target(guy: Guy)
+signal death(guy: Guy)
 
 #
 @export var is_controlled := false
@@ -46,6 +48,8 @@ var target: Node2D = null :
 		target = value
 		if target != null:
 			has_target = true
+			if target is Guy:
+				target.death.connect(on_target_died)
 		else:
 			has_target = false
 	get:
@@ -54,15 +58,31 @@ var target_position := Vector2.ZERO
 var has_target := false
 var can_attack := true
 
+@export var MAX_HEALTH := 10
+var health: float :
+	set(value):
+		health = value
+		var bar: HealthBar = $D/HealthBar
+		bar.set_progress(health/MAX_HEALTH)
+		bar.visible = health != MAX_HEALTH
+		#
+		if health <= 0:
+			death.emit(self)
+	get:
+		return health
+
 
 func _ready() -> void:
 	$Body/Hand.held_item = preload("res://sword.tscn").instantiate()
 	$Body/Hand.held_item.set_wielder(self)
 	team = team
 	linear_damp = RESTING_DAMP
+	health = MAX_HEALTH
 
 func _process(delta: float) -> void:
 	$Clothing.global_position = $Body/HatSpot.global_position
+	$D/HealthBar.global_position = global_position + Vector2(0, 50)*$Body.scale.x
+	$D/HealthBar.scale = $Body.scale
 
 func _physics_process(delta: float) -> void:
 	if is_controlled:
@@ -174,6 +194,7 @@ func rotate_towards(target_angle: float, amount: float) -> void:
 func get_hit(attack: Attack) -> void:
 	$Animation.play("hit")
 	self.apply_impulse(attack.get_impulse())
+	health -= attack.get_damage()
 	$HitStunTimer.start()
 	modulate = Color(1.0, 0.8, 0.9)
 
@@ -207,3 +228,8 @@ func _on_attack_timer_timeout() -> void:
 func _on_retarget_timer_timeout() -> void:
 	wants_target.emit(self)
 	$RetargetTimer.start(0.5+randf()*10.0)
+
+func on_target_died(target: Node2D) -> void:
+	target = null
+	has_target = false
+	wants_target.emit(self)

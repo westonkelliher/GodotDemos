@@ -10,8 +10,6 @@ script = ExtResource("1_7nept")
 [node name="Sword" parent="." instance=ExtResource("1_lv071")]
 position = Vector2(303, 251)
 
-[node name="Targetables" type="Node2D" parent="."]
-
-[node name="Guy" parent="Targetables" instance=ExtResource("2_rjuyv")]
+[node name="Guy" parent="." instance=ExtResource("2_rjuyv")]
 position = Vector2(333, 163)
 is_controlled = true
