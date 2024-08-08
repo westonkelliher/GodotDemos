@@ -12,3 +12,4 @@ position = Vector2(303, 251)
 
 [node name="Guy" parent="." instance=ExtResource("2_rjuyv")]
 position = Vector2(333, 163)
+is_controlled = true

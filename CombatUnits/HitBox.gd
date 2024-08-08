@@ -1,8 +1,10 @@
 class_name HitBox
 extends Area2D
 
+
 @export var damage := 10
-@export var impact := 100.0
+@export var impact := 40000.0
+@export var wielder: Guy = null
 #var impulse
 
 func _init() -> void:
