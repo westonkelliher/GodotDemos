@@ -11,3 +11,6 @@ func can_swing() -> bool:
 
 func set_wielder(guy: Guy) -> void:
 	$Pivot/HitBox.wielder = guy
+
+func get_aggression() -> CollisionShape2D:
+	return $AggressionMod

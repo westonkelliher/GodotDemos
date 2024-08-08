@@ -18,5 +18,7 @@ func spawn_unit(team: Guy.Team, loc: Vector2) -> void:
 	var guy := preload("res://guy.tscn").instantiate()
 	guy.position = loc
 	guy.team = team
+	if team == Guy.Team.BLUE:
+		guy.set_size(3.0)
 	guy.target = $Guy
 	add_child(guy)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3llbbs11olsu"]
+[gd_scene load_steps=13 format=3 uid="uid://c3llbbs11olsu"]
 
 [ext_resource type="Texture2D" uid="uid://jybaqel04xyd" path="res://guy.png" id="1_kymau"]
 [ext_resource type="Script" path="res://guy.gd" id="1_mgahl"]
 [ext_resource type="Script" path="res://HurtBox.gd" id="2_lehs3"]
 [ext_resource type="PackedScene" uid="uid://dhnjwp6phamtf" path="res://hand.tscn" id="4_i82hd"]
 [ext_resource type="Texture2D" uid="uid://dulljsgrh3tdu" path="res://hat.png" id="5_fbcmo"]
+[ext_resource type="Texture2D" uid="uid://rclhgeeerj2y" path="res://hand.png" id="6_d8ogo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jmby7"]
 bounce = 0.2
@@ -12,12 +13,15 @@ bounce = 0.2
 [sub_resource type="CircleShape2D" id="CircleShape2D_4vupe"]
 radius = 41.1096
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mocjj"]
+radius = 44.0454
+
 [sub_resource type="Animation" id="Animation_w156w"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:scale")
+tracks/0/path = NodePath("Body/Sprite:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -34,7 +38,7 @@ step = 0.0666667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:scale")
+tracks/0/path = NodePath("Body/Sprite:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -50,9 +54,6 @@ _data = {
 "hit": SubResource("Animation_bw75y")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mocjj"]
-radius = 44.0454
-
 [node name="Guy" type="RigidBody2D"]
 mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_jmby7")
@@ -61,40 +62,57 @@ linear_damp = 1.0
 script = ExtResource("1_mgahl")
 team = 0
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4vupe")
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Body"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_kymau")
 
-[node name="Shape" type="CollisionShape2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="Body"]
 visible = false
-shape = SubResource("CircleShape2D_4vupe")
+script = ExtResource("2_lehs3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HurtBox"]
+shape = SubResource("CircleShape2D_mocjj")
+debug_color = Color(0.294118, 0.627451, 0, 0.419608)
+
+[node name="Hand" parent="Body" instance=ExtResource("4_i82hd")]
+position = Vector2(29, 46)
+
+[node name="LeftHand" parent="Body" instance=ExtResource("4_i82hd")]
+position = Vector2(29, -46)
+scale = Vector2(1, -1)
+
+[node name="HatSpot" type="Marker2D" parent="Body"]
+position = Vector2(-34, 0)
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_m2kfr")
 }
 
-[node name="HurtBox" type="Area2D" parent="."]
-visible = false
-script = ExtResource("2_lehs3")
+[node name="Clothing" type="Sprite2D" parent="."]
+position = Vector2(-33, 0)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_fbcmo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource("CircleShape2D_mocjj")
-debug_color = Color(0.294118, 0.627451, 0, 0.419608)
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(100, 0)
 
-[node name="Hand" parent="." instance=ExtResource("4_i82hd")]
-position = Vector2(29, 46)
-
-[node name="LeftHand" parent="." instance=ExtResource("4_i82hd")]
-position = Vector2(29, -46)
-scale = Vector2(1, -1)
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("6_d8ogo")
 
 [node name="HitStunTimer" type="Timer" parent="."]
 wait_time = 0.75
 one_shot = true
 
-[node name="Clothing" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("5_fbcmo")
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
 
 [connection signal="timeout" from="HitStunTimer" to="." method="_on_hit_stun_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

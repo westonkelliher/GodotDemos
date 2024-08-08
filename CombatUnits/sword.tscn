@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://datptccuqeb7s"]
+[gd_scene load_steps=9 format=3 uid="uid://datptccuqeb7s"]
 
 [ext_resource type="Texture2D" uid="uid://conihd2kfco7m" path="res://sword.png" id="1_gr48y"]
 [ext_resource type="Script" path="res://sword.gd" id="1_tj3s6"]
@@ -70,6 +70,9 @@ _data = {
 "slash": SubResource("Animation_8us50")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4sfhq"]
+radius = 36.0555
+
 [node name="Sword" type="Node2D"]
 position = Vector2(-1, -1)
 script = ExtResource("1_tj3s6")
@@ -101,3 +104,8 @@ debug_color = Color(0.733333, 0.435294, 0.498039, 0.419608)
 libraries = {
 "": SubResource("AnimationLibrary_jrdnr")
 }
+
+[node name="AggressionMod" type="CollisionShape2D" parent="."]
+position = Vector2(34, -24)
+shape = SubResource("CircleShape2D_4sfhq")
+debug_color = Color(0.356863, 0.482353, 1, 0.196078)
