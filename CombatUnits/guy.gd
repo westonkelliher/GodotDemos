@@ -10,6 +10,9 @@ static var TeamColors := {
 }
 
 #
+signal wants_target(guy: Guy)
+
+#
 @export var is_controlled := false
 @export var team := Team.RED :
 	set(value):
@@ -26,7 +29,9 @@ static var TeamColors := {
 		return size
 #
 const MAX_SPEED := 220.0
+var top_speed := MAX_SPEED
 const ACC := 600.0
+var acc := ACC
 const ANGULAR_SPEED := 4.0
 # damping
 const RESTING_DAMP := 5.0 # applied while getting to max speed
@@ -39,7 +44,10 @@ var target_rotation := 0.0
 var target: Node2D = null :
 	set(value):
 		target = value
-		has_target = true
+		if target != null:
+			has_target = true
+		else:
+			has_target = false
 	get:
 		return target
 var target_position := Vector2.ZERO
@@ -80,6 +88,12 @@ func handle_input() -> void:
 		#$Hand.position += Vector2(10.0, -10.0)
 		if $Body/LeftHand.can_swing():
 			$Body/LeftHand.swing()
+	if Input.is_action_pressed("run"):
+		top_speed = MAX_SPEED*2.0
+		acc = ACC*5.0
+	else:
+		top_speed = MAX_SPEED
+		acc = ACC
 	# movement
 	var move_vec := Vector2.ZERO
 	if Input.is_action_pressed("move_left"):
@@ -92,13 +106,13 @@ func handle_input() -> void:
 		move_vec.y += 1.0
 	if move_vec.length() > 0:
 		var toward := move_vec.normalized()
-		if linear_velocity.dot(toward) < MAX_SPEED:
+		if linear_velocity.dot(toward) < top_speed:
 			# TODO: counteract damping force
-			self.apply_force(move_vec.normalized()*ACC*mass)
+			self.apply_force(move_vec.normalized()*acc*mass)
 	if move_vec.length() == 0:
 		linear_damp = RESTING_DAMP
 	else:
-		if linear_velocity.length() > MAX_SPEED:
+		if linear_velocity.length() > top_speed:
 			linear_damp = SPRINT_DAMP
 		else:
 			linear_damp = RUN_DAMP
@@ -128,6 +142,7 @@ func handle_intention() -> void:
 	else:
 		linear_damp = RUN_DAMP
 	#
+	handle_aggression()
 
 func handle_aggression() -> void:
 	if not can_attack:
@@ -136,10 +151,12 @@ func handle_aggression() -> void:
 		$Body/LeftHand.swing()
 		$AttackTimer.start()
 		can_attack = false
+		return
 	if $Body/Hand.wants_to_swing():
 		$Body/Hand.swing()
 		$AttackTimer.start()
 		can_attack = false
+		return
 	
 
 func rotate_towards(target_angle: float, amount: float) -> void:
@@ -185,3 +202,8 @@ func get_radius() -> float:
 
 func _on_attack_timer_timeout() -> void:
 	can_attack = true
+
+
+func _on_retarget_timer_timeout() -> void:
+	wants_target.emit(self)
+	$RetargetTimer.start(0.5+randf()*10.0)

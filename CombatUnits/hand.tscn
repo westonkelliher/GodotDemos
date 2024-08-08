@@ -70,8 +70,9 @@ _data = {
 "swing": SubResource("Animation_3sr5s")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lxtdj"]
-radius = 15.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pjr3c"]
+radius = 9.42821
+height = 37.7128
 
 [node name="Hand" type="Node2D"]
 script = ExtResource("1_54vue")
@@ -94,6 +95,7 @@ script = ExtResource("3_xsn05")
 impact = 90000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/HitBox"]
+position = Vector2(2.714, 5)
 rotation = -0.523599
 shape = SubResource("CapsuleShape2D_cg185")
 disabled = true
@@ -107,8 +109,9 @@ libraries = {
 [node name="Aggression" type="Area2D" parent="."]
 
 [node name="Shape" type="CollisionShape2D" parent="Aggression"]
-position = Vector2(41, -27)
-shape = SubResource("CircleShape2D_lxtdj")
+position = Vector2(29, -15)
+rotation = 1.0472
+shape = SubResource("CapsuleShape2D_pjr3c")
 debug_color = Color(0.694118, 0.282353, 1, 0.196078)
 
 [connection signal="body_entered" from="Aggression" to="." method="_on_aggression_body_entered"]

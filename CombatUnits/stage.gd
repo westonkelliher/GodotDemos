@@ -19,6 +19,26 @@ func spawn_unit(team: Guy.Team, loc: Vector2) -> void:
 	guy.position = loc
 	guy.team = team
 	if team == Guy.Team.BLUE:
-		guy.set_size(3.0)
-	guy.target = $Guy
-	add_child(guy)
+		guy.set_size(2.0)
+	guy.target = $Targetables/Guy
+	guy.wants_target.connect(give_target)
+	$Targetables.add_child(guy)
+
+func give_target(guy: Guy) -> void:
+	var nearest: Node2D = null
+	var near_dist: float = 0.0
+	for child in $Targetables.get_children():
+		if child == guy:
+			continue
+		if child is Guy and child.team == guy.team:
+			continue
+		var child_dist := guy.global_position.distance_to(child.global_position)
+		if nearest == null:
+			nearest = child
+			near_dist = child_dist
+			continue
+		if child_dist < near_dist:
+			nearest = child
+			near_dist = child_dist
+	guy.target = nearest
+	print("targ:::: " + str(guy.target))
