@@ -8,7 +8,7 @@ func _process(delta: float) -> void:
 	if xx:
 		xx = false
 		remove_child($PanelC)
-		var a = load("res://blizock.tscn").instantiate()
+		var a = load("res://block.tscn").instantiate()
 		#add_child(a)
 		print("it is done")
 		for c in a.get_children():
@@ -18,8 +18,8 @@ func _process(delta: float) -> void:
 
 
 func _on_button_pressed() -> void:
-	var a = load("res://blizock.tscn").instantiate()
-	$C/C.add_child(a)
-	#$PanelC.queue_free()
-	#remove_child($PanelC)
+	var a = load("res://block.tscn").instantiate()
+	$C.add_child(a)
+	$PanelC.queue_free()
+	remove_child($PanelC)
 	print("press")

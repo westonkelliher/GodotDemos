@@ -36,20 +36,14 @@ corner_radius_bottom_left = 6
 [node name="Slot" type="MarginContainer"]
 custom_minimum_size = Vector2(80, 80)
 anchors_preset = -1
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 script = ExtResource("1_0gs4n")
 
-[node name="C" type="Control" parent="."]
+[node name="C" type="MarginContainer" parent="."]
 layout_mode = 2
-
-[node name="C" type="MarginContainer" parent="C"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.25
-anchor_top = 0.287
-anchor_right = 0.25
-anchor_bottom = 0.287
-offset_top = 0.0400009
-offset_bottom = 0.0400009
 
 [node name="PanelC" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(50, 50)
