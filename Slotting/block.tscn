@@ -10,6 +10,7 @@ custom_minimum_size = Vector2(100, 50)
 script = ExtResource("1_1drfm")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
+modulate = Color(0.729412, 0.596078, 0.639216, 1)
 layout_mode = 2
 texture = ExtResource("1_kvb61")
 patch_margin_left = 15
@@ -19,13 +20,20 @@ patch_margin_bottom = 15
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Box" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="Box"]
 layout_mode = 2
 
-[node name="Slot" parent="HBoxContainer" instance=ExtResource("2_o83nk")]
+[node name="Slot" parent="Box/HBox" instance=ExtResource("2_o83nk")]
 layout_mode = 2
 
-[node name="Appender" parent="HBoxContainer" instance=ExtResource("3_o537g")]
+[node name="Appender" parent="Box/HBox" instance=ExtResource("3_o537g")]
 layout_mode = 2
 
-[connection signal="activated" from="HBoxContainer/Appender" to="." method="_on_appender_activated"]
+[connection signal="activated" from="Box/HBox/Appender" to="." method="_on_appender_activated"]

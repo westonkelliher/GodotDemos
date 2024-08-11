@@ -37,11 +37,11 @@ corner_radius_bottom_left = 6
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hidyo"]
 
 [node name="Appender" type="Control"]
-custom_minimum_size = Vector2(70, 80)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 70.0
-offset_bottom = 80.0
+offset_right = 60.0
+offset_bottom = 60.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
 script = ExtResource("1_evu5v")

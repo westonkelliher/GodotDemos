@@ -34,7 +34,6 @@ corner_radius_bottom_left = 6
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hidyo"]
 
 [node name="Slot" type="MarginContainer"]
-custom_minimum_size = Vector2(80, 80)
 anchors_preset = -1
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
