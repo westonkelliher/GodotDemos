@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxjosuxow3w0w"]
+
+[ext_resource type="Texture2D" uid="uid://c34jwtu2l582j" path="res://nine-patch.png" id="1_lc6ej"]
+[ext_resource type="Script" path="res://blizock.gd" id="1_ou1kx"]
+[ext_resource type="PackedScene" uid="uid://1pphg8nkk265" path="res://slot.tscn" id="2_otgsp"]
+[ext_resource type="PackedScene" uid="uid://bfclb2u3qbkb0" path="res://appender.tscn" id="3_xg8hs"]
+
+[node name="Blizock" type="MarginContainer"]
+offset_right = 144.0
+offset_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_ou1kx")
+
+[node name="Bg" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_lc6ej")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Appender" parent="HBox" instance=ExtResource("3_xg8hs")]
+layout_mode = 2
+
+[node name="Slot" parent="HBox" instance=ExtResource("2_otgsp")]
+layout_mode = 2
+
+[connection signal="activated" from="HBox/Appender" to="." method="_on_appender_activated"]

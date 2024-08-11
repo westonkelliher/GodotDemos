@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd2f83prc0neo"]
+
+[ext_resource type="Script" path="res://container.gd" id="1_byjyk"]
+[ext_resource type="Texture2D" uid="uid://c34jwtu2l582j" path="res://nine-patch.png" id="1_hp35i"]
+
+[node name="Container" type="MarginContainer"]
+custom_minimum_size = Vector2(40, 30)
+anchors_preset = -1
+anchor_left = 0.036
+anchor_top = 0.057
+anchor_right = 0.036
+anchor_bottom = 0.057
+offset_left = 0.527996
+offset_top = 0.0639992
+offset_right = 36.528
+offset_bottom = 38.064
+script = ExtResource("1_byjyk")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_hp35i")

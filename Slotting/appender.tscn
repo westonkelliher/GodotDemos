@@ -1,0 +1,102 @@
+[gd_scene load_steps=9 format=3 uid="uid://bfclb2u3qbkb0"]
+
+[ext_resource type="Texture2D" uid="uid://4wkeet8kud4" path="res://plus.png" id="1_cfcw0"]
+[ext_resource type="Script" path="res://appender.gd" id="1_evu5v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xktk7"]
+bg_color = Color(0.780392, 0.635294, 0.482353, 1)
+border_width_left = 2
+border_width_top = 3
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.807843, 0.690196, 0.576471, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="Theme" id="Theme_77yxy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fwn52"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cw2nf"]
+bg_color = Color(0.6, 0.6, 0.6, 0.533333)
+border_width_left = 2
+border_width_top = 3
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3rsm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hidyo"]
+
+[node name="Appender" type="Control"]
+custom_minimum_size = Vector2(70, 80)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 70.0
+offset_bottom = 80.0
+size_flags_horizontal = 10
+size_flags_vertical = 4
+script = ExtResource("1_evu5v")
+
+[node name="PanelC" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(40, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -25.0
+offset_right = 20.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00393, 1)
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_xktk7")
+
+[node name="Control" type="Control" parent="PanelC"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelC/Control"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.5
+offset_top = -17.0
+offset_right = 48.5
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_cfcw0")
+
+[node name="Button" type="Button" parent="PanelC"]
+layout_mode = 2
+theme = SubResource("Theme_77yxy")
+theme_override_colors/icon_normal_color = Color(0, 0, 0.764706, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0.721569, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0.596078, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.537255, 0.513726, 0.572549, 1)
+theme_override_colors/icon_focus_color = Color(0.466667, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0.521569, 0.627451, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fwn52")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cw2nf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_i3rsm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hidyo")
+
+[connection signal="button_down" from="PanelC/Button" to="." method="_on_button_button_down"]
+[connection signal="pressed" from="PanelC/Button" to="." method="_on_button_pressed"]

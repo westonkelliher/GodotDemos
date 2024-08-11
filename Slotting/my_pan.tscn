@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://7qo6bom0m5js"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l2d4y"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="MyPan" type="Panel"]
+custom_minimum_size = Vector2(150, 150)
+anchors_preset = -1
+anchor_right = 0.13
+anchor_bottom = 0.231
+offset_right = 0.23999
+offset_bottom = 0.311996
+theme_override_styles/panel = SubResource("StyleBoxFlat_l2d4y")

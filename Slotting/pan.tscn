@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://sxbwhvltu52d"]
+
+[node name="Control" type="Panel"]
+custom_minimum_size = Vector2(20, 20)
+anchors_preset = -1
+anchor_right = 0.017
+anchor_bottom = 0.031
+offset_right = 0.415998
+offset_bottom = -0.0880013
+grow_horizontal = 2
+grow_vertical = 2

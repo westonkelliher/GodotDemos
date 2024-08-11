@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6cqw71wu5c5k"]
+
+[ext_resource type="Texture2D" uid="uid://c34jwtu2l582j" path="res://nine-patch.png" id="1_kvb61"]
+[ext_resource type="PackedScene" uid="uid://1pphg8nkk265" path="res://slot.tscn" id="2_o83nk"]
+[ext_resource type="PackedScene" uid="uid://bfclb2u3qbkb0" path="res://appender.tscn" id="3_o537g"]
+
+[node name="Block" type="MarginContainer"]
+custom_minimum_size = Vector2(100, 50)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_kvb61")
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Slot" parent="HBoxContainer" instance=ExtResource("2_o83nk")]
+layout_mode = 2
+
+[node name="Appender" parent="HBoxContainer" instance=ExtResource("3_o537g")]
+layout_mode = 2

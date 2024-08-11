@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://1pphg8nkk265"]
+
+[ext_resource type="Script" path="res://slot.gd" id="1_0gs4n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vyc4q"]
+bg_color = Color(1, 1, 0.956863, 1)
+border_width_left = 2
+border_width_top = 3
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.529412, 0.415686, 0.309804, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fwn52"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cw2nf"]
+bg_color = Color(0.6, 0.6, 0.6, 0.533333)
+border_width_left = 2
+border_width_top = 3
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3rsm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hidyo"]
+
+[node name="Slot" type="MarginContainer"]
+custom_minimum_size = Vector2(80, 80)
+offset_right = 70.0
+offset_bottom = 80.0
+script = ExtResource("1_0gs4n")
+
+[node name="PanelC" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_vyc4q")
+
+[node name="Button" type="Button" parent="PanelC"]
+layout_mode = 2
+theme_override_colors/icon_hover_pressed_color = Color(0.537255, 0.513726, 0.572549, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fwn52")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cw2nf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_i3rsm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hidyo")
+
+[connection signal="pressed" from="PanelC/Button" to="." method="_on_button_pressed"]
