@@ -2,7 +2,7 @@ class_name HitBox
 extends Area2D
 
 
-@export var damage := 1
+@export var damage := 0
 @export var impact := 40000.0
 @export var wielder: Guy = null
 #var impulse

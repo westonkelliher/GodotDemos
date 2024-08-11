@@ -4,7 +4,7 @@ extends Node
 
 var hitbox: HitBox = null
 var hurtbox: HurtBox = null
-var wielder_damage := 0
+var wielder_damage := 1
 var effects := {}
 
 

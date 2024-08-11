@@ -2,9 +2,12 @@ extends Node2D
 
 var targetables := []
 
+var do_give_weapon := false
+
 func _ready() -> void:
 	#$Sword.set_team(Guy.Team.RED)
 	targetables.append($Guy)
+	$Guy.give_sword()
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -26,6 +29,9 @@ func spawn_unit(team: Guy.Team, loc: Vector2, size: float) -> void:
 	guy.wants_target.connect(give_target)
 	guy.death.connect(handle_death)
 	add_child(guy)
+	if do_give_weapon:
+		guy.give_sword()
+	do_give_weapon = !do_give_weapon
 	targetables.append(guy)
 
 func give_target(guy: Guy) -> void:

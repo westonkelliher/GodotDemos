@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://datptccuqeb7s"]
 
-[ext_resource type="Texture2D" uid="uid://conihd2kfco7m" path="res://sword.png" id="1_gr48y"]
 [ext_resource type="Script" path="res://sword.gd" id="1_tj3s6"]
 [ext_resource type="Script" path="res://HitBox.gd" id="2_36lnr"]
+[ext_resource type="Texture2D" uid="uid://uo0ip2b50jlt" path="res://axe_tt.png" id="2_nlbt0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ha3c4"]
 radius = 37.6644
@@ -81,16 +81,16 @@ script = ExtResource("1_tj3s6")
 
 [node name="Sprite" type="Sprite2D" parent="Pivot"]
 z_index = 1
-position = Vector2(36, 0)
-rotation = 1.5708
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_gr48y")
+position = Vector2(42, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_nlbt0")
 
 [node name="HitBox" type="Area2D" parent="Pivot"]
 position = Vector2(36, 0)
 rotation = 1.5708
 scale = Vector2(0.4, 0.4)
 script = ExtResource("2_36lnr")
+damage = 1
 impact = 35000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/HitBox"]

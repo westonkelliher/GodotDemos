@@ -73,11 +73,13 @@ var health: float :
 
 
 func _ready() -> void:
-	$Body/Hand.held_item = preload("res://sword.tscn").instantiate()
-	$Body/Hand.held_item.set_wielder(self)
 	team = team
 	linear_damp = RESTING_DAMP
 	health = MAX_HEALTH
+
+func give_sword() -> void:
+	$Body/Hand.held_item = preload("res://sword.tscn").instantiate()
+	$Body/Hand.held_item.set_wielder(self)
 
 func _process(delta: float) -> void:
 	$Clothing.global_position = $Body/HatSpot.global_position
