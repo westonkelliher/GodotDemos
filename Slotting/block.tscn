@@ -27,3 +27,5 @@ layout_mode = 2
 
 [node name="Appender" parent="HBoxContainer" instance=ExtResource("3_o537g")]
 layout_mode = 2
+
+[connection signal="activated" from="HBoxContainer/Appender" to="." method="_on_appender_activated"]
