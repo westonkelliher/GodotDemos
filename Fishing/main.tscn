@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://t4us4g2gr125"]
+
+[ext_resource type="PackedScene" uid="uid://bas83gf4l2ygv" path="res://fish_target.tscn" id="1_og2pl"]
+[ext_resource type="PackedScene" uid="uid://reoe3kn1ht5c" path="res://rod_target.tscn" id="2_tll31"]
+[ext_resource type="PackedScene" uid="uid://ddqrsba884ssx" path="res://rod_bounds.tscn" id="3_wab6c"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="FishTarget" parent="." instance=ExtResource("1_og2pl")]
+position = Vector2(252, 264)
+
+[node name="RodTarget" parent="." instance=ExtResource("2_tll31")]
+position = Vector2(254, 328)
+
+[node name="RodBounds" parent="." instance=ExtResource("3_wab6c")]
+position = Vector2(257, 398)
