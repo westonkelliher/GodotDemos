@@ -1,18 +1,22 @@
 [gd_scene load_steps=5 format=3 uid="uid://b6cqw71wu5c5k"]
 
 [ext_resource type="Script" path="res://block.gd" id="1_1drfm"]
-[ext_resource type="Texture2D" uid="uid://c34jwtu2l582j" path="res://nine-patch.png" id="1_kvb61"]
+[ext_resource type="Texture2D" uid="uid://b5iurriabm47h" path="res://nine-patch-container.png" id="2_dn3qp"]
 [ext_resource type="PackedScene" uid="uid://1pphg8nkk265" path="res://slot.tscn" id="2_o83nk"]
 [ext_resource type="PackedScene" uid="uid://bfclb2u3qbkb0" path="res://appender.tscn" id="3_o537g"]
 
 [node name="Block" type="MarginContainer"]
 custom_minimum_size = Vector2(100, 50)
+offset_left = 22.0
+offset_top = 13.0
+offset_right = 128.0
+offset_bottom = 75.0
 script = ExtResource("1_1drfm")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
-modulate = Color(0.729412, 0.596078, 0.639216, 1)
+modulate = Color(0.968627, 0.996078, 1, 1)
 layout_mode = 2
-texture = ExtResource("1_kvb61")
+texture = ExtResource("2_dn3qp")
 patch_margin_left = 15
 patch_margin_top = 15
 patch_margin_right = 15
@@ -22,10 +26,10 @@ axis_stretch_vertical = 1
 
 [node name="Box" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
 
 [node name="HBox" type="HBoxContainer" parent="Box"]
 layout_mode = 2

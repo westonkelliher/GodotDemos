@@ -1,19 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://1pphg8nkk265"]
 
 [ext_resource type="Script" path="res://slot.gd" id="1_0gs4n"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vyc4q"]
-bg_color = Color(1, 1, 0.956863, 1)
-border_width_left = 2
-border_width_top = 3
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.529412, 0.415686, 0.309804, 1)
-border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[ext_resource type="Texture2D" uid="uid://dyyirbv112ig6" path="res://slot.png" id="2_6g2fh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fwn52"]
 
@@ -34,7 +22,6 @@ corner_radius_bottom_left = 6
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hidyo"]
 
 [node name="Slot" type="MarginContainer"]
-anchors_preset = -1
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -44,15 +31,23 @@ script = ExtResource("1_0gs4n")
 [node name="C" type="MarginContainer" parent="."]
 layout_mode = 2
 
-[node name="PanelC" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(50, 50)
+[node name="PanelC" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_vyc4q")
+texture = ExtResource("2_6g2fh")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
 
 [node name="Button" type="Button" parent="PanelC"]
 layout_mode = 2
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 28.0
+offset_bottom = 28.0
 theme_override_colors/icon_hover_pressed_color = Color(0.537255, 0.513726, 0.572549, 1)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_fwn52")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cw2nf")
