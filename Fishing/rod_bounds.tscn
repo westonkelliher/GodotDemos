@@ -1,30 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddqrsba884ssx"]
+[gd_scene load_steps=4 format=3 uid="uid://ddqrsba884ssx"]
 
-[ext_resource type="Texture2D" uid="uid://l2kub080v7jv" path="res://icon.svg" id="1_1k6eb"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjggm"]
-size = Vector2(74, 20)
+[ext_resource type="Script" path="res://rod_bounds.gd" id="1_7ih63"]
+[ext_resource type="PackedScene" uid="uid://reoe3kn1ht5c" path="res://rod_target.tscn" id="3_0r4j4"]
+[ext_resource type="PackedScene" uid="uid://bas83gf4l2ygv" path="res://fish_target.tscn" id="4_hq1gq"]
 
 [node name="RodBounds" type="Node2D"]
 position = Vector2(0, 97)
+script = ExtResource("1_7ih63")
 
-[node name="Bottom" type="StaticBody2D" parent="."]
+[node name="BottomLine" type="Line2D" parent="."]
+position = Vector2(0, 25)
+points = PackedVector2Array(-10, 0, 10, 0)
+width = 1.0
 
-[node name="Shape" type="CollisionShape2D" parent="Bottom"]
-shape = SubResource("RectangleShape2D_jjggm")
+[node name="TopLine" type="Line2D" parent="."]
+position = Vector2(0, -25)
+points = PackedVector2Array(-10, 0, 10, 0)
+width = 1.0
 
-[node name="Sprite" type="Sprite2D" parent="Bottom"]
-position = Vector2(-2.98023e-08, -1)
-scale = Vector2(0.585938, 0.140625)
-texture = ExtResource("1_1k6eb")
+[node name="RodTarget" parent="." instance=ExtResource("3_0r4j4")]
 
-[node name="Top" type="StaticBody2D" parent="."]
-
-[node name="Shape" type="CollisionShape2D" parent="Top"]
-position = Vector2(0, -193)
-shape = SubResource("RectangleShape2D_jjggm")
-
-[node name="Sprite" type="Sprite2D" parent="Top"]
-position = Vector2(-0.499999, -192)
-scale = Vector2(0.585938, 0.140625)
-texture = ExtResource("1_1k6eb")
+[node name="FishTarget" parent="." instance=ExtResource("4_hq1gq")]

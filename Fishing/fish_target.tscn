@@ -1,20 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://bas83gf4l2ygv"]
+[gd_scene load_steps=4 format=3 uid="uid://bas83gf4l2ygv"]
 
 [ext_resource type="Texture2D" uid="uid://da73wug8v0grw" path="res://fish.png" id="1_ar846"]
+[ext_resource type="Script" path="res://fish_target.gd" id="1_fu4ep"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3tqc7"]
 size = Vector2(30, 30)
 
-[node name="FishTarget" type="RigidBody2D"]
-collision_layer = 4
-gravity_scale = 0.0
+[node name="FishTarget" type="Node2D"]
+script = ExtResource("1_fu4ep")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.588235)
 rotation = 0.462614
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.08, 0.1)
 texture = ExtResource("1_ar846")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="SwimTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Area"]
 shape = SubResource("RectangleShape2D_3tqc7")
 debug_color = Color(0.345098, 0.619608, 0.152941, 0.419608)
+
+[connection signal="timeout" from="SwimTimer" to="." method="_on_swim_timer_timeout"]
