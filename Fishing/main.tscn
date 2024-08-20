@@ -1,10 +1,101 @@
-[gd_scene load_steps=2 format=3 uid="uid://t4us4g2gr125"]
+[gd_scene load_steps=14 format=3 uid="uid://t4us4g2gr125"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_fwt04"]
+[ext_resource type="Texture2D" uid="uid://dkqfj7rch7ed6" path="res://bg.png" id="1_l03po"]
 [ext_resource type="PackedScene" uid="uid://ddqrsba884ssx" path="res://rod_bounds.tscn" id="3_wab6c"]
+[ext_resource type="Texture2D" uid="uid://dx47cdb08aa0o" path="res://arrows.png" id="4_s25no"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdsts"]
+atlas = ExtResource("4_s25no")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc4b4"]
+atlas = ExtResource("4_s25no")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jw2fr"]
+atlas = ExtResource("4_s25no")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2kg1i"]
+atlas = ExtResource("4_s25no")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0v4u"]
+atlas = ExtResource("4_s25no")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cigi"]
+atlas = ExtResource("4_s25no")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yr1dr"]
+atlas = ExtResource("4_s25no")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lo1jm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdsts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc4b4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jw2fr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2kg1i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0v4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cigi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yr1dr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_73tlb"]
+font_size = 70
+outline_size = 20
+outline_color = Color(0.141176, 0.415686, 0.729412, 1)
 
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+offset_left = 100.0
+offset_right = 100.0
+script = ExtResource("1_fwt04")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_l03po")
+centered = false
 
 [node name="RodBounds" parent="." instance=ExtResource("3_wab6c")]
-position = Vector2(257, 398)
+position = Vector2(256, 608)
+container_height = 400.0
+
+[node name="Arrow" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(61, 58)
+sprite_frames = SubResource("SpriteFrames_lo1jm")
+frame = 3
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 73.0
+offset_top = 85.0
+offset_right = 412.0
+offset_bottom = 181.0
+text = "You did it!"
+label_settings = SubResource("LabelSettings_73tlb")
+
+[connection signal="win" from="RodBounds" to="." method="_on_rod_bounds_win"]

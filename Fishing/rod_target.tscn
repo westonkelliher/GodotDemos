@@ -1,22 +1,24 @@
 [gd_scene load_steps=4 format=3 uid="uid://reoe3kn1ht5c"]
 
-[ext_resource type="Texture2D" uid="uid://l2kub080v7jv" path="res://icon.svg" id="1_2fwi8"]
 [ext_resource type="Script" path="res://rod_target.gd" id="1_qe15c"]
+[ext_resource type="Texture2D" uid="uid://e6h6tjmgncww" path="res://box.png" id="2_quyar"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwrfv"]
-size = Vector2(26, 50)
 
-[node name="RodTarget" type="Area2D"]
-collision_layer = 2
+[node name="RodTarget" type="Node2D"]
 script = ExtResource("1_qe15c")
 
-[node name="Shape" type="CollisionShape2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
+self_modulate = Color(0.192157, 0.560784, 0.721569, 0.784314)
+position = Vector2(-4.17233e-07, -1.98185e-06)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_quyar")
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Area"]
 shape = SubResource("RectangleShape2D_vwrfv")
 debug_color = Color(0.439216, 0.52549, 0.760784, 0.419608)
 
-[node name="Sprite" type="Sprite2D" parent="."]
-modulate = Color(0.211765, 0.439216, 1, 0.305882)
-self_modulate = Color(0.105882, 0.243137, 0.486275, 1)
-position = Vector2(-4.17233e-07, -1.98185e-06)
-scale = Vector2(0.203125, 0.390625)
-texture = ExtResource("1_2fwi8")
+[connection signal="area_entered" from="Area" to="." method="_on_area_area_entered"]
+[connection signal="area_exited" from="Area" to="." method="_on_area_area_exited"]

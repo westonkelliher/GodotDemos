@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnnc6tum1hgpe"]
+
+[ext_resource type="Script" path="res://progress_bar.gd" id="1_6v8hg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h68i7"]
+bg_color = Color(0.498039, 0.498039, 0.498039, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4rej"]
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vok8x"]
+bg_color = Color(0.866667, 0.929412, 0.87451, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="ProgressBar" type="Node2D"]
+rotation = 4.71239
+script = ExtResource("1_6v8hg")
+
+[node name="Outer" type="Panel" parent="."]
+offset_top = -35.0
+offset_right = 110.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_h68i7")
+
+[node name="Inner" type="Panel" parent="."]
+offset_left = 5.0
+offset_top = -30.0
+offset_right = 105.0
+offset_bottom = -5.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_d4rej")
+
+[node name="Progress" type="Panel" parent="."]
+offset_left = 5.0
+offset_top = -30.0
+offset_right = 15.0
+offset_bottom = -5.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vok8x")

@@ -1,12 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddqrsba884ssx"]
+[gd_scene load_steps=6 format=3 uid="uid://ddqrsba884ssx"]
 
 [ext_resource type="Script" path="res://rod_bounds.gd" id="1_7ih63"]
+[ext_resource type="Texture2D" uid="uid://bp8ajentk51dl" path="res://bounder.png" id="2_ximnm"]
 [ext_resource type="PackedScene" uid="uid://reoe3kn1ht5c" path="res://rod_target.tscn" id="3_0r4j4"]
+[ext_resource type="PackedScene" uid="uid://cnnc6tum1hgpe" path="res://progress_bar.tscn" id="4_2f3t3"]
 [ext_resource type="PackedScene" uid="uid://bas83gf4l2ygv" path="res://fish_target.tscn" id="4_hq1gq"]
 
 [node name="RodBounds" type="Node2D"]
-position = Vector2(0, 97)
 script = ExtResource("1_7ih63")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -407.0
+offset_right = 107.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ximnm")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
 [node name="BottomLine" type="Line2D" parent="."]
 position = Vector2(0, 25)
@@ -21,3 +41,20 @@ width = 1.0
 [node name="RodTarget" parent="." instance=ExtResource("3_0r4j4")]
 
 [node name="FishTarget" parent="." instance=ExtResource("4_hq1gq")]
+
+[node name="ProgressBar" parent="." instance=ExtResource("4_2f3t3")]
+position = Vector2(-110, 5)
+
+[node name="LeftLine" type="Line2D" parent="."]
+position = Vector2(0, -25)
+points = PackedVector2Array(0, -50, 0, 50)
+width = 1.0
+
+[node name="RightLine" type="Line2D" parent="."]
+position = Vector2(0, -25)
+points = PackedVector2Array(0, -50, 0, 50)
+width = 1.0
+
+[connection signal="fish_enter" from="RodTarget" to="." method="_on_rod_target_fish_enter"]
+[connection signal="fish_exit" from="RodTarget" to="." method="_on_rod_target_fish_exit"]
+[connection signal="complete" from="ProgressBar" to="." method="_on_progress_bar_complete"]
