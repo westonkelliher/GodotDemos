@@ -9,7 +9,7 @@ size = Vector3(0.6, 0.06, 0.6)
 
 [sub_resource type="BoxMesh" id="BoxMesh_r0r25"]
 material = ExtResource("1_sddld")
-size = Vector3(0.4, 0.06, 0.5)
+size = Vector3(0.4, 0.04, 0.5)
 
 [node name="Wing" type="Node3D"]
 script = ExtResource("1_hn5pe")
