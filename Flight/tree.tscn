@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://icdyyyjkrd37"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ntxo7"]
+radius = 0.507426
+height = 2.1951
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ugosh"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.8
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qt1jy"]
+albedo_color = Color(0.345098, 0.254902, 0.129412, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nctuo"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fceob"]
+frequency = 0.0345
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xfkbo"]
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_fceob")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qr45h"]
+noise_type = 3
+frequency = 0.049
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gbh88"]
+seamless = true
+noise = SubResource("FastNoiseLite_qr45h")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyios"]
+albedo_color = Color(0.266667, 0.462745, 0.239216, 1)
+roughness_texture = SubResource("NoiseTexture2D_gbh88")
+emission = Color(0, 0.87451, 0, 1)
+normal_enabled = true
+normal_scale = 0.24
+normal_texture = SubResource("NoiseTexture2D_xfkbo")
+
+[node name="Tree" type="StaticBody3D"]
+
+[node name="Shape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_ntxo7")
+
+[node name="Trunk" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("CylinderMesh_ugosh")
+surface_material_override/0 = SubResource("StandardMaterial3D_qt1jy")
+
+[node name="Trunk2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+mesh = SubResource("CapsuleMesh_nctuo")
+surface_material_override/0 = SubResource("StandardMaterial3D_qyios")

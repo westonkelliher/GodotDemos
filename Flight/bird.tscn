@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwifatahjw2iw"]
+
+[ext_resource type="Script" path="res://bird.gd" id="1_spr0f"]
+[ext_resource type="Material" uid="uid://cffmhpki7ah77" path="res://wing_mat.tres" id="1_us2py"]
+[ext_resource type="PackedScene" uid="uid://br826gu3twll6" path="res://wing.tscn" id="1_wmpwx"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qgsme"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qonja"]
+material = ExtResource("1_us2py")
+size = Vector3(0.15, 1, 0.15)
+
+[node name="Bird" type="CharacterBody3D"]
+script = ExtResource("1_spr0f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.197503, -0.00287512)
+shape = SubResource("SphereShape3D_qgsme")
+
+[node name="Body" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="Torso" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+mesh = SubResource("BoxMesh_qonja")
+skeleton = NodePath("../..")
+
+[node name="Wings" type="Node3D" parent="."]
+
+[node name="RightWing" parent="Wings" instance=ExtResource("1_wmpwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
+
+[node name="LeftWing" parent="Wings" instance=ExtResource("1_wmpwx")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)

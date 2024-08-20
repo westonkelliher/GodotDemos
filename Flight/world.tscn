@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://mlo6tf84cnqg"]
+
+[ext_resource type="PackedScene" uid="uid://dd08y67gqs75" path="res://floor.tscn" id="1_33vac"]
+[ext_resource type="PackedScene" uid="uid://icdyyyjkrd37" path="res://tree.tscn" id="2_fv5iu"]
+[ext_resource type="PackedScene" uid="uid://dwifatahjw2iw" path="res://bird.tscn" id="3_bjcqp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_axce7"]
+sky_top_color = Color(0.215686, 0.435294, 0.690196, 1)
+sky_curve = 0.106066
+ground_bottom_color = Color(0.6, 0.52549, 0.341176, 1)
+ground_curve = 0.0386375
+
+[sub_resource type="Sky" id="Sky_5n7ue"]
+sky_material = SubResource("ProceduralSkyMaterial_axce7")
+
+[sub_resource type="Environment" id="Environment_x5ugx"]
+background_mode = 2
+sky = SubResource("Sky_5n7ue")
+
+[node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_x5ugx")
+
+[node name="Floor" parent="." instance=ExtResource("1_33vac")]
+
+[node name="Trees" type="Node3D" parent="."]
+
+[node name="Tree" parent="Trees" instance=ExtResource("2_fv5iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.237, 0, 5.6417)
+
+[node name="Tree1" parent="Trees" instance=ExtResource("2_fv5iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4618, 0, -8.65936)
+
+[node name="Tree2" parent="Trees" instance=ExtResource("2_fv5iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.80788, 0, 0)
+
+[node name="Tree3" parent="Trees" instance=ExtResource("2_fv5iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.4387, 0, -2.32847)
+
+[node name="Tree4" parent="Trees" instance=ExtResource("2_fv5iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5081, 0, 3.89692)
+
+[node name="Tree5" parent="Trees" instance=ExtResource("2_fv5iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.3938, 0, -37.989)
+
+[node name="Tree6" parent="Trees" instance=ExtResource("2_fv5iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.23901, 0, -50.454)
+
+[node name="Tree7" parent="Trees" instance=ExtResource("2_fv5iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.90814, 0, -32.3579)
+
+[node name="Tree8" parent="Trees" instance=ExtResource("2_fv5iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.264, 0, -41.3916)
+
+[node name="Tree9" parent="Trees" instance=ExtResource("2_fv5iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -67.2933, 0, 46.6773)
+
+[node name="Tree10" parent="Trees" instance=ExtResource("2_fv5iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185.005, 0, -25.7669)
+
+[node name="Tree11" parent="Trees" instance=ExtResource("2_fv5iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.4063, 0, -193.068)
+
+[node name="Tree12" parent="Trees" instance=ExtResource("2_fv5iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 184.225, 0, 149.555)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.91113, -0.18859, 0.366437, 0, 0.889153, 0.45761, -0.412119, -0.416942, 0.810134, 1.79893, 2.56471, 3.19214)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.919095, -0.0931528, -0.382867, 0.380549, 0.461886, 0.801152, 0.102211, -0.882034, 0.459966, 0, 378.573, 0)
+
+[node name="Bird" parent="." instance=ExtResource("3_bjcqp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.739705, 0)

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://br826gu3twll6"]
+
+[ext_resource type="Script" path="res://wing.gd" id="1_hn5pe"]
+[ext_resource type="Material" uid="uid://cffmhpki7ah77" path="res://wing_mat.tres" id="1_sddld"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yx38h"]
+material = ExtResource("1_sddld")
+size = Vector3(0.6, 0.06, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r0r25"]
+material = ExtResource("1_sddld")
+size = Vector3(0.4, 0.06, 0.5)
+
+[node name="Wing" type="Node3D"]
+script = ExtResource("1_hn5pe")
+
+[node name="F1" type="Node3D" parent="."]
+
+[node name="Base" type="MeshInstance3D" parent="F1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
+mesh = SubResource("BoxMesh_yx38h")
+skeleton = NodePath("../..")
+
+[node name="F2" type="Node3D" parent="F1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -1.49012e-08, 0)
+
+[node name="Base" type="MeshInstance3D" parent="F1/F2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, -0.03)
+mesh = SubResource("BoxMesh_r0r25")
+skeleton = NodePath("../..")
