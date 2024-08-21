@@ -6,6 +6,7 @@ var flap_angle := 0.0
 var pitch := 0.0
 var roll := 0.0
 var tip_pitch := 0.0
+var yaw := 0.0
 
 func _process(delta: float) -> void:
 	pass
@@ -28,9 +29,14 @@ func set_tip_pitch(angle: float) -> void:
 	tip_pitch = angle
 	position_wing()
 
+func set_yaw(angle: float) -> void:
+	yaw = angle
+	position_wing()
+
 #
 func position_wing() -> void:
 	$F1.rotation.z = flap_angle
-	$F1/F2.rotation.z = roll + flap_angle*0.8 - 0.6
+	$F1/F2.rotation.z = flap_angle*0.8 - 0.6
 	$F1.rotation.x = pitch
-	$F1/F2.rotation.x = pitch*0.2 + tip_pitch
+	$F1/F2.rotation.x = pitch*0.2 + tip_pitch*0.5 + roll*0.5
+	$F1.rotation.y = yaw

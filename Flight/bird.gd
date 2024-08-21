@@ -7,13 +7,12 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-var MIN_GRAV_MULT := 0.10 # flat wings parallel with the ground
-var GRAV_FROM_FLAPPED := 0.20 # additional gravity when wings are fully flapped
-var MAX_GRAV_MULT := 0.30
-
-# lift
-const LIFT_MULT := 3.0
-const DIFT_MULT := 0.8
+# lift and drag
+const LIFT_MULT := 9.0
+const DIFT_MULT := 1.0
+const FLAT_DRAG :=  5.0 # meters / second
+const DIVE_DRAG :=  0.02 # added to flat and flapped
+const DRAFT_LEVEL := 100.0
 
 # torso tilt
 const MAX_TORSO_TILT_SPEED := 1.0 # as fraction not in radians
@@ -28,14 +27,14 @@ var torso_tilt := 0.0 # min 0.0 max 1.0
 # : negative number means downward position
 const MAX_FLAP_ANGLE := 0.2  
 const MIN_FLAP_ANGLE := -0.8
-const MAX_FLAP_SPEED := 4.0
-const FLAP_ACC := 40.0
+const MAX_FLAP_SPEED := 5.0
+const FLAP_ACC := 70.0
 var flap_speed := 0.0
 var flap_angle := 0.0
 
 # wing pitch
-const MAX_WING_PITCH := 0.6
-const MIN_WING_PITCH := -0.6
+const MAX_WING_PITCH := 0.3
+const MIN_WING_PITCH := -0.4
 const MAX_WING_PITCH_SPEED := 6.0
 const WING_PITCH_ACC := 18.0
 var wing_pitch := 0.0
@@ -49,6 +48,12 @@ const MIN_WING_ROLL := -0.3
 const WING_ROLL_SPEED := 2.0
 var wing_roll := 0.0
 
+# yaw (from wing roll)
+const YAW_ACC := 2.1
+var STATIC_YAW_DAMPING := 0.1
+var ACTIVE_YAW_DAMPING := 0.6
+var yaw_speed := 0.0
+
 # body roll
 var BODY_ROLL_RATE := 3.0
 var STATIC_BODY_ROLL_DAMPING := 0.1
@@ -60,17 +65,25 @@ var body_roll_speed := 0.0  # added to rotation.z
 # : proportional to body pitch speed
 var MAX_TIP_PITCH := 0.7
 var MIN_TIP_PITCH := -0.7
-var MAX_TIP_PITCH_DIST := 200.0
+var MAX_TIP_PITCH_DIST := 400.0
 var TIP_PITCH_RATE := 0.05
 var tip_pitch := 0.0
+
+# wing yaw
+var MAX_WING_YAW := 0.2
+var MAX_WING_YAW_DIST := 800.0
+var WING_YAW_RATE := 0.05
+var wing_yaw := 0.0
+
 
 # mouse drags
 var drag_start := Vector2.ZERO # relative to center of screens
 var is_dragging := false
+var mouse_yaw_speed := 0.0
 
 #### Builtins ####
 func _process(delta: float) -> void:
-	$D/Vecs.global_position = global_position
+	$D/Vecs.global_position = global_position + Vector3.UP
 
 func _physics_process(delta: float) -> void:
 	handle_torso_tilt(delta)
@@ -81,7 +94,7 @@ func _physics_process(delta: float) -> void:
 	#
 	# flapping
 	var lift_normal := Vector3.UP.rotated(Vector3.RIGHT, wing_pitch)
-	lift_normal = lift_normal.rotated(Vector3.FORWARD, -wing_roll)
+	lift_normal = lift_normal.rotated(Vector3.FORWARD, wing_roll*0.5)
 	lift_normal = basis * lift_normal
 	if flap_speed < 0:
 		var lift: float = abs(flap_speed) * cos(flap_angle) * LIFT_MULT
@@ -91,19 +104,37 @@ func _physics_process(delta: float) -> void:
 		var dift: float = abs(flap_speed) * cos(flap_angle) * DIFT_MULT
 		velocity -= lift_normal * dift * delta
 	#
-	# rolling
+	# yawing
 	if flap_speed < 0:
-		body_roll_speed += flap_speed * wing_roll * BODY_ROLL_RATE * delta
-	rotation.z += (1 - sin(flap_angle))*body_roll_speed * delta
+		yaw_speed += flap_speed * wing_roll * YAW_ACC * delta
+	rotation.y += yaw_speed * delta
 	if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
-		body_roll_speed *= pow(ACTIVE_BODY_ROLL_DAMPING, delta)
+		yaw_speed *= pow(ACTIVE_YAW_DAMPING, delta)
 	else:
-		body_roll_speed *= pow(STATIC_BODY_ROLL_DAMPING, delta)
+		yaw_speed *= pow(STATIC_YAW_DAMPING, delta)
+	#
+	# speed rolling
+	if velocity.length() > 1.0:
+		var speed_roll_intensity := (basis * Vector3.FORWARD).dot(velocity)*0.2
+		speed_roll_intensity *= 0.02 + 0.98*torso_tilt
+		body_roll_speed += -wing_roll * speed_roll_intensity * delta
+		var max_rs := pow(velocity.length(), 0.5) * 0.5
+		body_roll_speed = max(-max_rs, min(max_rs, body_roll_speed))
+		print(body_roll_speed)
+		rotation.z += body_roll_speed * delta
+		# damp it
+		if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
+			body_roll_speed *= pow(0.2, delta)
 	#
 	# pitching
-	rotation.x += tip_pitch * TIP_PITCH_RATE
+	var paxis := basis * Vector3.RIGHT 
+	rotate(paxis, tip_pitch * TIP_PITCH_RATE)
+	# yawing
+	var yaxis := basis * Vector3.DOWN
+	rotate(yaxis, wing_yaw * WING_YAW_RATE)
+	velocity = velocity.rotated(yaxis, wing_yaw * WING_YAW_RATE)
 	#
-	# gravity and velocity damping
+	# gravity and velocity drag
 	if is_on_floor():
 		# TODO: proper drag
 		velocity *= pow(0.1, delta)
@@ -112,17 +143,15 @@ func _physics_process(delta: float) -> void:
 		torso_tilt = move_toward(torso_tilt, 0, 1.5*delta)
 		torso_tilt_speed = 0.0
 	else:
-		velocity *= pow(0.95, delta)
+		handle_air_drag(delta)
+		handle_forward_turning(delta)
 		# Add the gravity.
-		var grav_dif := MAX_GRAV_MULT - MIN_GRAV_MULT
-		var grav_mult: float = MIN_GRAV_MULT + grav_dif*abs(sin(flap_angle))
-		var grav := gravity*grav_mult
-		velocity.y -= grav * delta
+		velocity.y -= gravity * delta
 	#
 	# debug
 	$D/Vecs/WingNormal.target_position = lift_normal*0.5
 	$D/Vecs/ForSpeed.target_position = velocity.project(Vector3.FORWARD)
-	
+	#
 
 	move_and_slide()
 
@@ -197,15 +226,15 @@ func handle_wing_roll(delta: float) -> void:
 		wing_roll = move_toward(wing_roll, 0, WING_ROLL_SPEED*delta)
 	else:
 		# neither held
-		var balancing_roll := wrap_angle(rotation.z) / PI * MAX_WING_ROLL
-		wing_roll = move_toward(wing_roll, balancing_roll, WING_ROLL_SPEED*delta)
+		#var balancing_roll := wrap_angle(rotation.z) / PI * MAX_WING_ROLL
+		#wing_roll = move_toward(wing_roll, balancing_roll, WING_ROLL_SPEED*delta)
+		wing_roll = move_toward(wing_roll, 0, WING_ROLL_SPEED*delta)
 	#
 	$Wings/RightWing.set_roll(wing_roll)
 	$Wings/LeftWing.set_roll(-wing_roll)
 
 # mouse drags
 func handle_mouse_drags(delta: float) -> void:
-	# calculate drag vector
 	if Input.is_action_just_pressed("clickdown"):
 		drag_start = get_relative_mouse_pos()
 	is_dragging = Input.is_action_pressed("clickdown")
@@ -213,12 +242,55 @@ func handle_mouse_drags(delta: float) -> void:
 	if is_dragging:
 		drag_vec = get_relative_mouse_pos() - drag_start
 	#
-	tip_pitch = -drag_vec.y / MAX_TIP_PITCH_DIST
+	# pitch
+	tip_pitch = -drag_vec.y / MAX_TIP_PITCH_DIST * torso_tilt
 	tip_pitch = max(MIN_TIP_PITCH, min(MAX_TIP_PITCH, tip_pitch))
-	
 	#
 	$Wings/LeftWing.set_tip_pitch(tip_pitch)
 	$Wings/RightWing.set_tip_pitch(tip_pitch)
+	#
+	# yaw
+	wing_yaw = drag_vec.x / MAX_WING_YAW_DIST * torso_tilt
+	wing_yaw = max(-MAX_WING_YAW, min(MAX_WING_YAW, wing_yaw))
+	#
+	$Wings/LeftWing.set_yaw(wing_yaw)
+	$Wings/RightWing.set_yaw(-wing_yaw)
+
+
+func handle_air_drag(delta: float) -> void:
+	# calculate terminal vel for this vel normal
+	var wing_forward := basis * Vector3.FORWARD.rotated(Vector3.RIGHT, wing_pitch)
+	var straightness: float = pow(abs(wing_forward.dot(velocity.normalized())), 2.0)
+	var flappedness: float = abs(flap_angle) / abs(MIN_FLAP_ANGLE)
+	# calculate drag
+	var wing_up := basis * Vector3.UP.rotated(Vector3.RIGHT, wing_pitch)
+	var drag_normal := -velocity.normalized()
+	var drag_mult: float = DIVE_DRAG
+	drag_mult += drag_normal.dot(wing_up)*FLAT_DRAG
+	drag_mult *= 0.2 + 0.8*torso_tilt
+	drag_mult *= 1.0/(1.0+flap_speed)
+	print(drag_mult)
+	velocity += wing_up * velocity.length() * drag_mult * delta
+	#
+	#$D/Vecs/Drag.target_position = drag_normal
+	#$D/Vecs/WingUp.target_position = wing_up
+	#$D/Vecs/DragReflect.target_position = draft_normal
+
+func handle_forward_turning(delta: float) -> void:
+	# yaw
+	var turn_intensity := 1.0 - 5.0/(5.0 + velocity.length())
+	turn_intensity *= torso_tilt
+	var forward := basis * Vector3.FORWARD
+	var total_a := forward.angle_to(velocity)
+	if total_a < 0.01:
+		return
+	var axis := forward.cross(velocity).normalized()
+	var amount := total_a * (1.0 - pow(0.6, delta)) * turn_intensity
+	rotate(axis, amount)
+	# roll
+	if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
+		var roll_intensity: float = abs(cos(rotation.z)) * 0.5
+		rotation.z *= (1.0 - roll_intensity*delta)
 
 
 #### Utility ####
@@ -234,3 +306,12 @@ func wrap_angle(angle: float) -> float:
 	while angle < -PI:
 		angle += 2*PI
 	return angle
+
+
+func turn_toward_vector(fraction: float, start: Vector3, target: Vector3) -> Vector3:
+	var total_a := start.angle_to(target)
+	if total_a < 0.01:
+		return start
+	var axis := start.cross(target).normalized()
+	var amount := total_a * fraction
+	return start.rotated(axis, tip_pitch * TIP_PITCH_RATE)

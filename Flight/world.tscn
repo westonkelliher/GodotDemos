@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://mlo6tf84cnqg"]
+[gd_scene load_steps=9 format=3 uid="uid://mlo6tf84cnqg"]
 
 [ext_resource type="PackedScene" uid="uid://dd08y67gqs75" path="res://floor.tscn" id="1_33vac"]
 [ext_resource type="Script" path="res://world.gd" id="1_cb1s3"]
 [ext_resource type="PackedScene" uid="uid://icdyyyjkrd37" path="res://tree.tscn" id="2_fv5iu"]
 [ext_resource type="PackedScene" uid="uid://dwifatahjw2iw" path="res://bird.tscn" id="3_bjcqp"]
+[ext_resource type="PackedScene" uid="uid://jhn0yhq36e1n" path="res://test_object.tscn" id="5_iule0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_axce7"]
 sky_top_color = Color(0.215686, 0.435294, 0.690196, 1)
@@ -74,10 +75,20 @@ shadow_opacity = 0.5
 shadow_blur = 3.0
 
 [node name="Bird" parent="." instance=ExtResource("3_bjcqp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.739705, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.84692, 0)
 
 [node name="CamPivot" type="Node3D" parent="."]
-transform = Transform3D(0.771602, 0, 0.636105, 0, 1, 0, -0.636105, 0, 0.771602, 0, 0, 0)
+transform = Transform3D(0.801995, 0, 0.597331, 0, 1, 0, -0.597331, 0, 0.801995, 0, 0, 0)
 
 [node name="Camera" type="Camera3D" parent="CamPivot"]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2.5, 3)
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 4, 5)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 21.0
+offset_top = 22.0
+offset_right = 75.0
+offset_bottom = 45.0
+text = "Vel"
+
+[node name="TestObject" parent="." instance=ExtResource("5_iule0")]
+transform = Transform3D(0.852408, -0.175893, 0.492404, 0.492404, 0.586824, -0.642788, -0.175893, 0.790379, 0.586824, 2.7994, 2.05, -3.50941)

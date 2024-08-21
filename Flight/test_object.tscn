@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://jhn0yhq36e1n"]
+
+[ext_resource type="Script" path="res://test_object.gd" id="1_1r73h"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_f0v3i"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_miqce"]
+
+[node name="TestObject" type="CharacterBody3D"]
+transform = Transform3D(0.852408, -0.175893, 0.492404, 0.492404, 0.586824, -0.642788, -0.175893, 0.790379, 0.586824, 0, 0, 0)
+script = ExtResource("1_1r73h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_f0v3i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_miqce")

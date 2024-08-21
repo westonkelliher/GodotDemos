@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dd08y67gqs75"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_64rso"]
-top_radius = 500.0
-bottom_radius = 500.0
+top_radius = 5000.0
+bottom_radius = 5000.0
 height = 0.1
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_pjwp4"]
@@ -22,7 +22,7 @@ normal_texture = SubResource("NoiseTexture2D_0k3le")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_jfhuo"]
 height = 0.1
-radius = 500.0
+radius = 5000.0
 
 [node name="Floor" type="StaticBody3D"]
 
