@@ -1,7 +1,7 @@
 extends Node3D
 
 
-const CAM_SPRING := 0.1 # 90% per second
+const CAM_SPRING := 0.06 # 94% per second
 const CAM_SPRING_MULT := 2.0 # square the distance
 
 

@@ -7,11 +7,22 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-var MIN_GRAV_MULT := 0.12
+var MIN_GRAV_MULT := 0.10 # flat wings parallel with the ground
+var GRAV_FROM_FLAPPED := 0.20 # additional gravity when wings are fully flapped
 var MAX_GRAV_MULT := 0.30
+
 # lift
 const LIFT_MULT := 3.0
 const DIFT_MULT := 0.8
+
+# torso tilt
+const MAX_TORSO_TILT_SPEED := 1.0 # as fraction not in radians
+const TORSO_TILT_ACC := 0.5
+const TORSO_DETILT_ACC := 2.0
+const TORSO_TILT_START := -PI/4.0
+const TORSO_TILT_END := -PI/2.0
+var torso_tilt_speed := 0.0
+var torso_tilt := 0.0 # min 0.0 max 1.0
 
 # flap
 # : negative number means downward position
@@ -48,17 +59,21 @@ var body_roll_speed := 0.0  # added to rotation.z
 # : set by click drag y-distance
 # : proportional to body pitch speed
 var MAX_TIP_PITCH := 0.7
-var MIN_TIP_PITCH := 0.7
-var TIP_PITCH_RATE := 0.01
+var MIN_TIP_PITCH := -0.7
+var MAX_TIP_PITCH_DIST := 200.0
+var TIP_PITCH_RATE := 0.05
+var tip_pitch := 0.0
 
 # mouse drags
 var drag_start := Vector2.ZERO # relative to center of screens
+var is_dragging := false
 
+#### Builtins ####
 func _process(delta: float) -> void:
 	$D/Vecs.global_position = global_position
 
-
 func _physics_process(delta: float) -> void:
+	handle_torso_tilt(delta)
 	handle_flap(delta)
 	handle_wing_pitch(delta)
 	handle_wing_roll(delta)
@@ -85,14 +100,19 @@ func _physics_process(delta: float) -> void:
 	else:
 		body_roll_speed *= pow(STATIC_BODY_ROLL_DAMPING, delta)
 	#
+	# pitching
+	rotation.x += tip_pitch * TIP_PITCH_RATE
+	#
 	# gravity and velocity damping
 	if is_on_floor():
 		# TODO: proper drag
 		velocity *= pow(0.1, delta)
 		# return rotations
 		rotation.z = move_toward(rotation.z, 0, 1.5*delta)
+		torso_tilt = move_toward(torso_tilt, 0, 1.5*delta)
+		torso_tilt_speed = 0.0
 	else:
-		velocity *= pow(0.8, delta)
+		velocity *= pow(0.95, delta)
 		# Add the gravity.
 		var grav_dif := MAX_GRAV_MULT - MIN_GRAV_MULT
 		var grav_mult: float = MIN_GRAV_MULT + grav_dif*abs(sin(flap_angle))
@@ -106,21 +126,32 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+
+#### Wing Helpers ####
+# wing flap
+func handle_torso_tilt(delta: float) -> void:
+	if flap_speed < 0.1:
+		# not flapping - so lift up torso
+		torso_tilt_speed = move_toward(torso_tilt_speed, MAX_TORSO_TILT_SPEED, TORSO_TILT_ACC*delta)
+	else:
+		# flapping - so deploy torso
+		torso_tilt_speed = move_toward(torso_tilt_speed, -MAX_TORSO_TILT_SPEED, TORSO_DETILT_ACC*delta)
+	torso_tilt += torso_tilt_speed*delta 
+	if torso_tilt > 1.0:
+		torso_tilt = 1.0
+		torso_tilt_speed = 0.0
+	elif torso_tilt < 0.0:
+		torso_tilt = 0.0
+		torso_tilt_speed = 0.0
+	$Body.rotation.x = torso_tilt * TORSO_TILT_END + (1.0 - torso_tilt) * TORSO_TILT_START
+
 # wing flap
 func handle_flap(delta: float) -> void:
-	if Input.is_action_pressed("ui_accept") and flap_angle > MIN_FLAP_ANGLE:
+	if Input.is_action_pressed("flap") and flap_angle > MIN_FLAP_ANGLE:
 		flap_speed = move_toward(flap_speed, -MAX_FLAP_SPEED, FLAP_ACC*delta)
-	elif !Input.is_action_pressed("ui_accept") and flap_angle < MAX_FLAP_ANGLE:
+	elif !Input.is_action_pressed("flap") and flap_angle < MAX_FLAP_ANGLE:
 		flap_speed = move_toward(flap_speed, MAX_FLAP_SPEED, FLAP_ACC*delta)
-	#wing_pitch += pitch_speed*delta
-	#if wing_pitch > MAX_WING_PITCH:
-		#wing_pitch = MAX_WING_PITCH
-		#pitch_speed = 0.0
-	#elif wing_pitch < MIN_WING_PITCH:
-		#wing_pitch = MIN_WING_PITCH
-		#pitch_speed = 0.0
-	#ap_speed, MAX_FLAP_SPEED, FLAP_ACC*delta)
-	#
+
 	flap_angle += flap_speed*delta
 	if flap_angle > MAX_FLAP_ANGLE:
 		flap_angle = MAX_FLAP_ANGLE
@@ -174,14 +205,27 @@ func handle_wing_roll(delta: float) -> void:
 
 # mouse drags
 func handle_mouse_drags(delta: float) -> void:
+	# calculate drag vector
 	if Input.is_action_just_pressed("clickdown"):
 		drag_start = get_relative_mouse_pos()
+	is_dragging = Input.is_action_pressed("clickdown")
+	var drag_vec := Vector2.ZERO
+	if is_dragging:
+		drag_vec = get_relative_mouse_pos() - drag_start
+	#
+	tip_pitch = -drag_vec.y / MAX_TIP_PITCH_DIST
+	tip_pitch = max(MIN_TIP_PITCH, min(MAX_TIP_PITCH, tip_pitch))
+	
+	#
+	$Wings/LeftWing.set_tip_pitch(tip_pitch)
+	$Wings/RightWing.set_tip_pitch(tip_pitch)
 
+
+#### Utility ####
 func get_relative_mouse_pos() -> Vector2:
 	var screen_center := get_viewport().get_visible_rect().size / 2.0
 	var mouse_p := get_viewport().get_mouse_position() - screen_center
 	return mouse_p
-
 
 # takes in any angle and returns an equivalent angle between -PI and PI
 func wrap_angle(angle: float) -> float:
