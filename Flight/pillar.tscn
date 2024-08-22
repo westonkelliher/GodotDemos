@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://hk1w0x6yn1fw"]
+
+[ext_resource type="Material" uid="uid://bhki4awlglugj" path="res://gray.tres" id="2_6i85u"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bragv"]
+material = ExtResource("2_6i85u")
+height = 50.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_oqcn2"]
+height = 50.0
+
+[node name="Pillar" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+mesh = SubResource("CylinderMesh_bragv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+shape = SubResource("CylinderShape3D_oqcn2")

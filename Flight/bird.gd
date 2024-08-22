@@ -15,9 +15,9 @@ const DIVE_DRAG :=  0.02 # added to flat and flapped
 const DRAFT_LEVEL := 100.0
 
 # torso tilt
-const MAX_TORSO_TILT_SPEED := 1.0 # as fraction not in radians
-const TORSO_TILT_ACC := 0.5
-const TORSO_DETILT_ACC := 2.0
+const MAX_TORSO_TILT_SPEED := 1.5 # as fraction not in radians
+const TORSO_TILT_ACC := 0.7
+const TORSO_DETILT_ACC := 2.2
 const TORSO_TILT_START := -PI/4.0
 const TORSO_TILT_END := -PI/2.0
 var torso_tilt_speed := 0.0
@@ -33,7 +33,7 @@ var flap_speed := 0.0
 var flap_angle := 0.0
 
 # wing pitch
-const MAX_WING_PITCH := 0.3
+const MAX_WING_PITCH := 0.9
 const MIN_WING_PITCH := -0.4
 const MAX_WING_PITCH_SPEED := 6.0
 const WING_PITCH_ACC := 18.0
@@ -50,29 +50,29 @@ var wing_roll := 0.0
 
 # yaw (from wing roll)
 const YAW_ACC := 2.1
-var STATIC_YAW_DAMPING := 0.1
-var ACTIVE_YAW_DAMPING := 0.6
+const STATIC_YAW_DAMPING := 0.1
+const ACTIVE_YAW_DAMPING := 0.6
 var yaw_speed := 0.0
 
 # body roll
-var BODY_ROLL_RATE := 3.0
-var STATIC_BODY_ROLL_DAMPING := 0.1
-var ACTIVE_BODY_ROLL_DAMPING := 0.6
+const BODY_ROLL_RATE := 3.0
+const STATIC_BODY_ROLL_DAMPING := 0.1
+const ACTIVE_BODY_ROLL_DAMPING := 0.6
 var body_roll_speed := 0.0  # added to rotation.z
 
 # tip pitch
 # : set by click drag y-distance
 # : proportional to body pitch speed
-var MAX_TIP_PITCH := 0.7
-var MIN_TIP_PITCH := -0.7
-var MAX_TIP_PITCH_DIST := 400.0
-var TIP_PITCH_RATE := 0.05
+const MAX_TIP_PITCH := 0.7
+const MIN_TIP_PITCH := -0.7
+const MAX_TIP_PITCH_DIST := 400.0
+const TIP_PITCH_RATE := 0.05
 var tip_pitch := 0.0
 
 # wing yaw
-var MAX_WING_YAW := 0.2
-var MAX_WING_YAW_DIST := 800.0
-var WING_YAW_RATE := 0.05
+const MAX_WING_YAW := 0.2
+const MAX_WING_YAW_DIST := 800.0
+const WING_YAW_RATE := 0.05
 var wing_yaw := 0.0
 
 
@@ -80,6 +80,9 @@ var wing_yaw := 0.0
 var drag_start := Vector2.ZERO # relative to center of screens
 var is_dragging := false
 var mouse_yaw_speed := 0.0
+
+# foil lift
+const FOIL_LIFT_MULT := 0.2
 
 #### Builtins ####
 func _process(delta: float) -> void:
@@ -93,16 +96,16 @@ func _physics_process(delta: float) -> void:
 	handle_mouse_drags(delta)
 	#
 	# flapping
-	var lift_normal := Vector3.UP.rotated(Vector3.RIGHT, wing_pitch)
-	lift_normal = lift_normal.rotated(Vector3.FORWARD, wing_roll*0.5)
-	lift_normal = basis * lift_normal
+	var flap_normal := Vector3.UP.rotated(Vector3.RIGHT, wing_pitch)
+	#lift_normal = lift_normal.rotated(Vector3.FORWARD, wing_roll*0.5)
+	flap_normal = basis * flap_normal
 	if flap_speed < 0:
-		var lift: float = abs(flap_speed) * cos(flap_angle) * LIFT_MULT
-		velocity += lift_normal * lift * delta
+		var flap_lift: float = abs(flap_speed) * cos(flap_angle) * LIFT_MULT
+		velocity += flap_normal * flap_lift * delta
 		#
 	elif flap_speed > 0:
 		var dift: float = abs(flap_speed) * cos(flap_angle) * DIFT_MULT
-		velocity -= lift_normal * dift * delta
+		velocity -= flap_normal * dift * delta
 	#
 	# yawing
 	if flap_speed < 0:
@@ -134,11 +137,20 @@ func _physics_process(delta: float) -> void:
 	rotate(yaxis, wing_yaw * WING_YAW_RATE)
 	velocity = velocity.rotated(yaxis, wing_yaw * WING_YAW_RATE)
 	#
+	# airfoil lift
+	var lift_normal := basis * Vector3.UP
+	var beak_normal := basis * Vector3.FORWARD
+	var lift_mult := velocity.dot(beak_normal) * FOIL_LIFT_MULT * torso_tilt * cos(flap_angle)
+	velocity -= velocity.normalized() * lift_mult * delta * 0.8 # 0.8 means we get 0.2 of created energy
+	if flap_speed < 0.1:
+		velocity += lift_normal * lift_mult * delta
+	#
 	# gravity and velocity drag
 	if is_on_floor():
 		# TODO: proper drag
 		velocity *= pow(0.1, delta)
 		# return rotations
+		rotation.x = move_toward(rotation.x, 0, 1.0*delta)
 		rotation.z = move_toward(rotation.z, 0, 1.5*delta)
 		torso_tilt = move_toward(torso_tilt, 0, 1.5*delta)
 		torso_tilt_speed = 0.0
@@ -159,12 +171,22 @@ func _physics_process(delta: float) -> void:
 #### Wing Helpers ####
 # wing flap
 func handle_torso_tilt(delta: float) -> void:
+	var forward := basis * Vector3.FORWARD
+	var tilt_acc := TORSO_TILT_ACC 
+	if velocity.length() > 0.1:
+		tilt_acc += 0.1* velocity.dot(forward) / pow(velocity.length(), 0.5)
+	if flap_angle == MIN_FLAP_ANGLE:
+		# deploy torso
+		torso_tilt_speed = move_toward(torso_tilt_speed, -MAX_TORSO_TILT_SPEED, 
+			TORSO_DETILT_ACC*delta)
 	if flap_speed < 0.1:
 		# not flapping - so lift up torso
-		torso_tilt_speed = move_toward(torso_tilt_speed, MAX_TORSO_TILT_SPEED, TORSO_TILT_ACC*delta)
-	else:
-		# flapping - so deploy torso
-		torso_tilt_speed = move_toward(torso_tilt_speed, -MAX_TORSO_TILT_SPEED, TORSO_DETILT_ACC*delta)
+		torso_tilt_speed = move_toward(torso_tilt_speed, MAX_TORSO_TILT_SPEED, 
+			tilt_acc*delta)
+	elif !Input.is_action_pressed("forward"):
+		# flapping - so deploy torso (unless forward flapping)
+		torso_tilt_speed = move_toward(torso_tilt_speed, -MAX_TORSO_TILT_SPEED, 
+			TORSO_DETILT_ACC*delta)
 	torso_tilt += torso_tilt_speed*delta 
 	if torso_tilt > 1.0:
 		torso_tilt = 1.0
@@ -172,7 +194,8 @@ func handle_torso_tilt(delta: float) -> void:
 	elif torso_tilt < 0.0:
 		torso_tilt = 0.0
 		torso_tilt_speed = 0.0
-	$Body.rotation.x = torso_tilt * TORSO_TILT_END + (1.0 - torso_tilt) * TORSO_TILT_START
+	$Body.rotation.x = torso_tilt * TORSO_TILT_END + (1.0 - torso_tilt) * (
+		TORSO_TILT_START)
 
 # wing flap
 func handle_flap(delta: float) -> void:
@@ -277,7 +300,7 @@ func handle_air_drag(delta: float) -> void:
 	#$D/Vecs/DragReflect.target_position = draft_normal
 
 func handle_forward_turning(delta: float) -> void:
-	# yaw
+	# yaw (only if we're facing down)
 	var turn_intensity := 1.0 - 5.0/(5.0 + velocity.length())
 	turn_intensity *= torso_tilt
 	var forward := basis * Vector3.FORWARD
@@ -286,11 +309,15 @@ func handle_forward_turning(delta: float) -> void:
 		return
 	var axis := forward.cross(velocity).normalized()
 	var amount := total_a * (1.0 - pow(0.6, delta)) * turn_intensity
-	rotate(axis, amount)
+	if forward.y < 0:
+		rotate(axis, amount)
 	# roll
 	if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
 		var roll_intensity: float = abs(cos(rotation.z)) * 0.5
 		rotation.z *= (1.0 - roll_intensity*delta)
+	# pitch (when torso down)
+	var pitch_restore_mult := (1.0 - torso_tilt) * 0.2
+	rotation.x = move_toward(rotation.x, 0, pitch_restore_mult*delta)
 
 
 #### Utility ####

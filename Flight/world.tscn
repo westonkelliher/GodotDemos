@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://mlo6tf84cnqg"]
+[gd_scene load_steps=10 format=3 uid="uid://mlo6tf84cnqg"]
 
 [ext_resource type="PackedScene" uid="uid://dd08y67gqs75" path="res://floor.tscn" id="1_33vac"]
 [ext_resource type="Script" path="res://world.gd" id="1_cb1s3"]
 [ext_resource type="PackedScene" uid="uid://icdyyyjkrd37" path="res://tree.tscn" id="2_fv5iu"]
 [ext_resource type="PackedScene" uid="uid://dwifatahjw2iw" path="res://bird.tscn" id="3_bjcqp"]
 [ext_resource type="PackedScene" uid="uid://jhn0yhq36e1n" path="res://test_object.tscn" id="5_iule0"]
+[ext_resource type="PackedScene" uid="uid://hk1w0x6yn1fw" path="res://pillar.tscn" id="6_3pknp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_axce7"]
 sky_top_color = Color(0.215686, 0.435294, 0.690196, 1)
@@ -30,7 +31,7 @@ environment = SubResource("Environment_x5ugx")
 [node name="Trees" type="Node3D" parent="."]
 
 [node name="Tree" parent="Trees" instance=ExtResource("2_fv5iu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.237, 0, 5.6417)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.3936, 0, 5.6417)
 
 [node name="Tree1" parent="Trees" instance=ExtResource("2_fv5iu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4618, 0, -8.65936)
@@ -90,5 +91,49 @@ offset_right = 75.0
 offset_bottom = 45.0
 text = "Vel"
 
-[node name="TestObject" parent="." instance=ExtResource("5_iule0")]
-transform = Transform3D(0.852408, -0.175893, 0.492404, 0.492404, 0.586824, -0.642788, -0.175893, 0.790379, 0.586824, 2.7994, 2.05, -3.50941)
+[node name="Objects" type="Node3D" parent="."]
+
+[node name="TestObject" parent="Objects" instance=ExtResource("5_iule0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5517, 2.84786, -58.0306)
+
+[node name="TestObject2" parent="Objects" instance=ExtResource("5_iule0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 287.846, 0.0500031, 196.867)
+
+[node name="TestObject3" parent="Objects" instance=ExtResource("5_iule0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -781.591, 0.0499878, 640.609)
+
+[node name="TestObject4" parent="Objects" instance=ExtResource("5_iule0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2607.73, 0.0499878, -1730.59)
+
+[node name="Pillar" parent="Objects" instance=ExtResource("6_3pknp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.7211, 0, 0)
+
+[node name="Pillar2" parent="Objects" instance=ExtResource("6_3pknp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.8487, 5.54625, 0)
+
+[node name="Pillar3" parent="Objects" instance=ExtResource("6_3pknp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 102.844, 0, 0)
+
+[node name="Pillar4" parent="Objects" instance=ExtResource("6_3pknp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.3527, 0, 61.3051)
+
+[node name="Pillar5" parent="Objects" instance=ExtResource("6_3pknp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110.602, 4.91297, 0)
+
+[node name="Pillar6" parent="Objects" instance=ExtResource("6_3pknp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94.3504, 5.55059, 0)
+
+[node name="Pillar7" parent="Objects" instance=ExtResource("6_3pknp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.1476, 0, 0)
+
+[node name="Pillar8" parent="Objects" instance=ExtResource("6_3pknp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.57, 5.54625, -154.274)
+
+[node name="Pillar9" parent="Objects" instance=ExtResource("6_3pknp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.5747, 0, -154.274)
+
+[node name="Pillar10" parent="Objects" instance=ExtResource("6_3pknp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -114.066, 0, -92.969)
+
+[node name="Pillar11" parent="Objects" instance=ExtResource("6_3pknp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.8163, 4.91297, -154.274)
