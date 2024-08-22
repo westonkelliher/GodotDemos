@@ -59,15 +59,18 @@ target_position = Vector3(0, -2, 0)
 debug_shape_custom_color = Color(0.639216, 0, 0.882353, 1)
 
 [node name="Drag" type="RayCast3D" parent="D/Vecs"]
+visible = false
 target_position = Vector3(0, 1, 0)
 collision_mask = 0
 debug_shape_custom_color = Color(0.00784314, 0.00784314, 0.00784314, 1)
 
 [node name="WingUp" type="RayCast3D" parent="D/Vecs"]
+visible = false
 collision_mask = 0
 debug_shape_custom_color = Color(1, 1, 1, 1)
 
 [node name="DragReflect" type="RayCast3D" parent="D/Vecs"]
+visible = false
 collision_mask = 0
 debug_shape_custom_color = Color(0.909804, 0.505882, 0.152941, 1)
 

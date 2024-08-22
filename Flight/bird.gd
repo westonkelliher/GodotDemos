@@ -183,7 +183,7 @@ func handle_torso_tilt(delta: float) -> void:
 		# not flapping - so lift up torso
 		torso_tilt_speed = move_toward(torso_tilt_speed, MAX_TORSO_TILT_SPEED, 
 			tilt_acc*delta)
-	elif !Input.is_action_pressed("forward"):
+	else:
 		# flapping - so deploy torso (unless forward flapping)
 		torso_tilt_speed = move_toward(torso_tilt_speed, -MAX_TORSO_TILT_SPEED, 
 			TORSO_DETILT_ACC*delta)
