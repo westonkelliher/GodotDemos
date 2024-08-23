@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvk6o3ljj26th"]
+
+[ext_resource type="PackedScene" uid="uid://ckyu7uovsxcpq" path="res://hand.tscn" id="1_6ssg7"]
+
+[node name="Stage" type="Node2D"]
+
+[node name="Hand" parent="." instance=ExtResource("1_6ssg7")]
+position = Vector2(404, 257)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://54nl2o3ys8dw"]
+
+[ext_resource type="Script" path="res://LineTest.gd" id="1_v6o11"]
+
+[sub_resource type="Curve2D" id="Curve2D_8kehn"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 86, 79, 0, 0, 0, 0, 255, 201, 0, 0, 0, 0, 415, 70)
+}
+point_count = 3
+
+[node name="LineTest" type="Node2D"]
+script = ExtResource("1_v6o11")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(360, 188)
+points = PackedVector2Array(12, 13, 135, 42, 226, 36, 292, 103, 362, 55, 510, 96)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 1
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_8kehn")

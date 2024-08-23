@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckyu7uovsxcpq"]
+
+[ext_resource type="Texture2D" uid="uid://c27kfv7lajcpx" path="res://b_hand_open.png" id="1_yob5d"]
+[ext_resource type="Texture2D" uid="uid://cylgsyecioafa" path="res://b_hand_grab.png" id="2_djxsl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_koapl"]
+atlas = ExtResource("1_yob5d")
+region = Rect2(0, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik42s"]
+atlas = ExtResource("2_djxsl")
+region = Rect2(0, 0, 400, 400)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_750eo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koapl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik42s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Hand" type="Node2D"]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_750eo")
