@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept"): # and is_on_floor():
-		velocity += basis[1] * JUMP_VELOCITY
+		velocity += up_direction * JUMP_VELOCITY
 
 	if is_on_floor():
 		# Calculate direction from player to planet center
