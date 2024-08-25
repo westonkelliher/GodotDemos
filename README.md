@@ -7,6 +7,7 @@ CheckItOut.
 Each demo was built in about 5 hours. They are not full games but rather a 
 single mechanic or feature that could be part of a game.
 
+## Your Task
 Your task is to go check out each demo then pick your favorite four. You should 
 judge based on whether you think the given feature would do well in an actual 
 game. Because these demos are pretty incomplete projects, the demos include a 
@@ -22,6 +23,7 @@ a screenshot or copy-paste your top picks and send em over to Weston.
 
 Example top_picks.txt:
 
+```
 CombatUnits: 
 Fishing: idea 2
 Flight: 
@@ -32,7 +34,7 @@ Ring:
 Slotting: 
 SmallWorld:
 TheClaw: idea 3
-
+```
 
 If you choose to add weights to your choices, indicate a demo you liked more 
 with a higher number. (Your weights will be normalized so don't worry about 
