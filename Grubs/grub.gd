@@ -117,3 +117,11 @@ func get_control_position():
 
 func _on_flop_timer_timeout():
 	_is_grab = !_is_grab
+	
+func explode():
+	pass
+
+
+func does_it_halt(program: String, input: String):
+	print("It halts (soon)")
+	explode()
