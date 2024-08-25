@@ -28,11 +28,12 @@ signal fish_exit()
 		return target_height
 
 # NOTE: y axis is turned upside down
-@export var y_gravity := -220.0
-@export var y_acceleration := 440.0
-@export var y_impulse := 40.0
-@export var x_base_acc := 50.0
-@export var x_base_impulse := 8.0
+const FACTOR = 0.6
+@export var y_gravity := -220.0*FACTOR
+@export var y_acceleration := 440.0*FACTOR
+@export var y_impulse := 40.0*FACTOR
+@export var x_base_acc := 50.0*FACTOR
+@export var x_base_impulse := 8.0*FACTOR
 @export var bottom_bounce := 0.6
 @export var top_bounce := 0.2
 @export var side_bounce := 0.35
@@ -90,7 +91,7 @@ func handle_input(delta: float) -> void:
 
 func get_x_bias() -> int:
 	var mouse_p := get_viewport().get_mouse_position()
-	var full := get_viewport_rect().size
+	var full := Vector2(700, 900)
 	var float_bias := (mouse_p.x - full.x * 0.5) / (full.x * 0.5)
 	var int_bias := int(float_bias*4.65)
 	if int_bias > 3:

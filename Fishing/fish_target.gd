@@ -25,12 +25,13 @@ extends Node2D
 	get:
 		return target_height
 
-@export var Y_ACC := 70.0
-@export var X_ACC := 20.0
-@export var Y_MAX_SPEED := 120.0
-@export var X_MAX_SPEED := 40.0
-@export var Y_IMPULSE := 7.0
-@export var X_IMPULSE := 2.5
+const FACTOR = 0.75
+@export var Y_ACC := 70.0*FACTOR
+@export var X_ACC := 20.0*FACTOR
+@export var Y_MAX_SPEED := 120.0*FACTOR
+@export var X_MAX_SPEED := 40.0*FACTOR
+@export var Y_IMPULSE := 7.0*FACTOR
+@export var X_IMPULSE := 2.5*FACTOR
 # NOTE: y axis is turned upside down
 var y_acc := 0.0
 var x_acc := 0.0

@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://t4us4g2gr125"]
+[gd_scene load_steps=15 format=3 uid="uid://t4us4g2gr125"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_fwt04"]
 [ext_resource type="Texture2D" uid="uid://dkqfj7rch7ed6" path="res://bg.png" id="1_l03po"]
 [ext_resource type="PackedScene" uid="uid://ddqrsba884ssx" path="res://rod_bounds.tscn" id="3_wab6c"]
 [ext_resource type="Texture2D" uid="uid://dx47cdb08aa0o" path="res://arrows.png" id="4_s25no"]
+[ext_resource type="Texture2D" uid="uid://bhv2jcu1usln0" path="res://README.png" id="5_ecykh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sdsts"]
 atlas = ExtResource("4_s25no")
@@ -97,5 +98,17 @@ offset_right = 412.0
 offset_bottom = 181.0
 text = "You did it!"
 label_settings = SubResource("LabelSettings_73tlb")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 566.0
+offset_top = 36.0
+offset_right = 1166.0
+offset_bottom = 864.0
+
+[node name="README" type="Sprite2D" parent="Panel"]
+position = Vector2(301, 410)
+scale = Vector2(1.29227, 1.29227)
+texture = ExtResource("5_ecykh")
 
 [connection signal="win" from="RodBounds" to="." method="_on_rod_bounds_win"]

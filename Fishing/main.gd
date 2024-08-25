@@ -17,7 +17,7 @@ func handle_input() -> void:
 
 func get_x_bias() -> int:
 	var mouse_p := get_viewport().get_mouse_position()
-	var full := get_viewport_rect().size
+	var full := Vector2(700, 900)
 	var float_bias := (mouse_p.x - full.x * 0.5) / (full.x * 0.5)
 	var int_bias := int(float_bias*4.65)
 	if int_bias > 3:
