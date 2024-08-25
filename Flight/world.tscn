@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://mlo6tf84cnqg"]
+[gd_scene load_steps=13 format=3 uid="uid://mlo6tf84cnqg"]
 
 [ext_resource type="PackedScene" uid="uid://dd08y67gqs75" path="res://floor.tscn" id="1_33vac"]
 [ext_resource type="Script" path="res://world.gd" id="1_cb1s3"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dwifatahjw2iw" path="res://bird.tscn" id="3_bjcqp"]
 [ext_resource type="PackedScene" uid="uid://jhn0yhq36e1n" path="res://test_object.tscn" id="5_iule0"]
 [ext_resource type="PackedScene" uid="uid://hk1w0x6yn1fw" path="res://pillar.tscn" id="6_3pknp"]
+[ext_resource type="Texture2D" uid="uid://bg3bo44wfl6ck" path="res://README.png" id="7_15th5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_axce7"]
 sky_top_color = Color(0.215686, 0.435294, 0.690196, 1)
@@ -19,6 +20,17 @@ sky_material = SubResource("ProceduralSkyMaterial_axce7")
 [sub_resource type="Environment" id="Environment_x5ugx"]
 background_mode = 2
 sky = SubResource("Sky_5n7ue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0vfek"]
+albedo_texture = ExtResource("7_15th5")
+albedo_texture_force_srgb = true
+emission_enabled = true
+emission_energy_multiplier = 0.5
+emission_texture = ExtResource("7_15th5")
+
+[sub_resource type="QuadMesh" id="QuadMesh_b38x3"]
+material = SubResource("StandardMaterial3D_0vfek")
+size = Vector2(7, 6.3)
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_cb1s3")
@@ -137,3 +149,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -114.066, 0, -92.969)
 
 [node name="Pillar11" parent="Objects" instance=ExtResource("6_3pknp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.8163, 4.91297, -154.274)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.101183, 3.2285, -3.34574)
+mesh = SubResource("QuadMesh_b38x3")

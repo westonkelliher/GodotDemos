@@ -292,7 +292,6 @@ func handle_air_drag(delta: float) -> void:
 	drag_mult += drag_normal.dot(wing_up)*FLAT_DRAG
 	drag_mult *= 0.2 + 0.8*torso_tilt
 	drag_mult *= 1.0/(1.0+flap_speed)
-	print(drag_mult)
 	velocity += wing_up * velocity.length() * drag_mult * delta
 	#
 	#$D/Vecs/Drag.target_position = drag_normal

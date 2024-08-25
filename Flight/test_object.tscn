@@ -14,7 +14,6 @@ height = 0.4
 radius = 10.0
 
 [node name="TestObject" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_1r73h")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
