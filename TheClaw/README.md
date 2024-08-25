@@ -17,6 +17,6 @@ throw rocks and other projectiles at oncoming enemies. If the base of the arm
 is attached to a moveable base instead of fixed in place, you could use it for 
 a "Getting Over It" style platformer.
 
-### Fun Facty
+### Fun Fact
 I ran out of time to fix the physics on the boxes, so they're buggy but you can 
 just imagine they have normal physics on them.
