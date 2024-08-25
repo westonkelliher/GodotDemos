@@ -29,8 +29,9 @@ emission_energy_multiplier = 0.5
 emission_texture = ExtResource("7_15th5")
 
 [sub_resource type="QuadMesh" id="QuadMesh_b38x3"]
+lightmap_size_hint = Vector2i(37, 33)
 material = SubResource("StandardMaterial3D_0vfek")
-size = Vector2(7, 6.3)
+size = Vector2(24, 13)
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_cb1s3")
@@ -46,7 +47,7 @@ environment = SubResource("Environment_x5ugx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.3936, 0, 5.6417)
 
 [node name="Tree1" parent="Trees" instance=ExtResource("2_fv5iu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4618, 0, -8.65936)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4618, 0, -19.9522)
 
 [node name="Tree2" parent="Trees" instance=ExtResource("2_fv5iu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.80788, 0, 0)
@@ -91,7 +92,7 @@ shadow_blur = 3.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.84692, 0)
 
 [node name="CamPivot" type="Node3D" parent="."]
-transform = Transform3D(0.801995, 0, 0.597331, 0, 1, 0, -0.597331, 0, 0.801995, 0, 0, 0)
+transform = Transform3D(0.819152, 0, 0.573577, 0, 1, 0, -0.573577, 0, 0.819152, 0, 0, 0)
 
 [node name="Camera" type="Camera3D" parent="CamPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 4, 5)
@@ -150,6 +151,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -114.066, 0, -92.969)
 [node name="Pillar11" parent="Objects" instance=ExtResource("6_3pknp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.8163, 4.91297, -154.274)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.101183, 3.2285, -3.34574)
+[node name="README" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.503077, 0.326977, 0, -0.326977, 0.503077, -0.101183, 3.24736, -5.47209)
 mesh = SubResource("QuadMesh_b38x3")
