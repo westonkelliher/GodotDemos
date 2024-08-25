@@ -1,13 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://c67qniiml4s6b"]
+[gd_scene load_steps=9 format=3 uid="uid://c67qniiml4s6b"]
 
 [ext_resource type="PackedScene" uid="uid://bgbyacj7gv4na" path="res://arm.tscn" id="1_x2b7p"]
 [ext_resource type="PackedScene" uid="uid://mkq5dsq34ovi" path="res://box.tscn" id="2_smprg"]
+[ext_resource type="Texture2D" uid="uid://bfhcq5me0ake6" path="res://README.png" id="3_u8sy6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qp8o8"]
 size = Vector3(10, 0.1, 10)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rpnk4"]
+albedo_color = Color(0.722803, 0.730447, 0.520064, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_vs7q4"]
+material = SubResource("StandardMaterial3D_rpnk4")
 size = Vector3(10, 0.1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5m0s"]
+albedo_texture = ExtResource("3_u8sy6")
+emission_enabled = true
+emission_energy_multiplier = 0.5
+emission_texture = ExtResource("3_u8sy6")
+
+[sub_resource type="QuadMesh" id="QuadMesh_4vjud"]
+material = SubResource("StandardMaterial3D_c5m0s")
+size = Vector2(10, 6)
 
 [node name="World" type="Node3D"]
 
@@ -48,3 +63,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.978865, 0.423612, -2.52456
 
 [node name="Box" parent="Boxes" instance=ExtResource("2_smprg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.68439, 0.423612, 0.536943)
+
+[node name="README" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39584, -6.87763)
+mesh = SubResource("QuadMesh_4vjud")
