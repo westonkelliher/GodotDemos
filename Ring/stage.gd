@@ -10,7 +10,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("click"):
+		handle_click(get_viewport().get_mouse_position())
 
 
 func _on_pop(ring: Ring) -> void:
@@ -18,15 +19,15 @@ func _on_pop(ring: Ring) -> void:
 
 
 func _on_spawn_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if not event is InputEventMouseButton:
-		return
-	if not (event.button_index == MOUSE_BUTTON_LEFT and event.pressed):
-		return 
-	if is_point_in_a_bit(event.position):
+	pass
+	
+func handle_click(pos: Vector2) -> void:
+	if is_point_in_a_bit(pos):
+		print('abcdgoldifh')
 		return
 	var bit := preload("res://Bits/a_bit.tscn").instantiate()
 	bit.pop.connect(_on_pop)
-	bit.position = event.position
+	bit.position = pos
 	$Bits.add_child(bit)
 
 func is_point_in_a_bit(p: Vector2) -> bool:
@@ -34,5 +35,6 @@ func is_point_in_a_bit(p: Vector2) -> bool:
 		var area: Area2D = c.get_node("Area")
 		var shape: CircleShape2D = area.get_child(0).shape
 		if p.distance_to(c.position) <= shape.radius:
+			c.pop_bit()
 			return true
 	return false
