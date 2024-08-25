@@ -15,17 +15,18 @@ func _physics_process(delta: float) -> void:
 		$Sword/Animation.play("slash")
 	var mouse_loc := get_viewport().get_mouse_position()
 	if Input.is_action_just_pressed("spawn_1"):
-		spawn_unit(Guy.Team.RED, mouse_loc, 0.7)
+		spawn_unit(Guy.Team.RED, mouse_loc, 0.7, 6)
 	if Input.is_action_just_pressed("spawn_2"):
-		spawn_unit(Guy.Team.BLUE, mouse_loc, 2.0)
+		spawn_unit(Guy.Team.GREEN, mouse_loc, 1.0, 10)
 	if Input.is_action_just_pressed("spawn_3"):
-		spawn_unit(Guy.Team.GREEN, mouse_loc, 1.0)
+		spawn_unit(Guy.Team.BLUE, mouse_loc, 2.0, 22)
 
-func spawn_unit(team: Guy.Team, loc: Vector2, size: float) -> void:
+func spawn_unit(team: Guy.Team, loc: Vector2, size: float, health: int) -> void:
 	var guy := preload("res://guy.tscn").instantiate()
 	guy.position = loc
 	guy.team = team
 	guy.set_size(size)
+	guy.MAX_HEALTH = health
 	guy.wants_target.connect(give_target)
 	guy.death.connect(handle_death)
 	add_child(guy)

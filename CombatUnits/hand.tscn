@@ -71,8 +71,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pjr3c"]
-radius = 9.42821
-height = 37.7128
+radius = 10.7942
+height = 33.2048
 
 [node name="Hand" type="Node2D"]
 script = ExtResource("1_54vue")
@@ -108,8 +108,8 @@ libraries = {
 [node name="Aggression" type="Area2D" parent="."]
 
 [node name="Shape" type="CollisionShape2D" parent="Aggression"]
-position = Vector2(29, -15)
-rotation = 1.0472
+position = Vector2(27, -23)
+rotation = 0.929334
 shape = SubResource("CapsuleShape2D_pjr3c")
 debug_color = Color(0.694118, 0.282353, 1, 0.196078)
 

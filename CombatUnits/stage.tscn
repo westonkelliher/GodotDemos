@@ -1,6 +1,52 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpis7x5knw1jr"]
+[gd_scene load_steps=4 format=3 uid="uid://dpis7x5knw1jr"]
 
 [ext_resource type="Script" path="res://stage.gd" id="1_7nept"]
+[ext_resource type="Texture2D" uid="uid://b3qr3wxgyh5gx" path="res://README.png" id="2_stw18"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j82gb"]
+size = Vector2(1200, 40)
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_7nept")
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.52549)
+offset_left = 144.0
+offset_top = 23.0
+offset_right = 872.0
+offset_bottom = 395.0
+scale = Vector2(1.2, 1.2)
+
+[node name="Sprite" type="Sprite2D" parent="Panel"]
+position = Vector2(364.742, 185.5)
+scale = Vector2(0.764563, 0.764563)
+texture = ExtResource("2_stw18")
+
+[node name="Wall" type="StaticBody2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Wall"]
+position = Vector2(577, -37)
+shape = SubResource("RectangleShape2D_j82gb")
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+position = Vector2(0, 728)
+
+[node name="Shape" type="CollisionShape2D" parent="Wall2"]
+position = Vector2(577, -37)
+shape = SubResource("RectangleShape2D_j82gb")
+
+[node name="Wall3" type="StaticBody2D" parent="."]
+position = Vector2(-79, -177)
+rotation = 1.5708
+
+[node name="Shape" type="CollisionShape2D" parent="Wall3"]
+position = Vector2(577, -37)
+shape = SubResource("RectangleShape2D_j82gb")
+
+[node name="Wall4" type="StaticBody2D" parent="."]
+position = Vector2(1161, -198)
+rotation = 1.5708
+
+[node name="Shape" type="CollisionShape2D" parent="Wall4"]
+position = Vector2(577, -37)
+shape = SubResource("RectangleShape2D_j82gb")
