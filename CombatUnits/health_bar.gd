@@ -22,4 +22,3 @@ func _process(delta: float) -> void:
 #### Other ####
 func set_progress(p: float) -> void:
 	_fill = clamp(p, 0.0, 1.0)
-

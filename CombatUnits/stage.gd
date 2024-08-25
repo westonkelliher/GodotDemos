@@ -6,8 +6,8 @@ var do_give_weapon := false
 
 func _ready() -> void:
 	#$Sword.set_team(Guy.Team.RED)
-	targetables.append($Guy)
-	$Guy.give_sword()
+	#targetables.append($Guy)
+	#$Guy.give_sword()
 	pass
 
 func _physics_process(delta: float) -> void:

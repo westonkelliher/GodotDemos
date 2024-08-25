@@ -1,15 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpis7x5knw1jr"]
+[gd_scene load_steps=2 format=3 uid="uid://dpis7x5knw1jr"]
 
 [ext_resource type="Script" path="res://stage.gd" id="1_7nept"]
-[ext_resource type="PackedScene" uid="uid://datptccuqeb7s" path="res://sword.tscn" id="1_lv071"]
-[ext_resource type="PackedScene" uid="uid://c3llbbs11olsu" path="res://guy.tscn" id="2_rjuyv"]
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_7nept")
-
-[node name="Sword" parent="." instance=ExtResource("1_lv071")]
-position = Vector2(303, 251)
-
-[node name="Guy" parent="." instance=ExtResource("2_rjuyv")]
-position = Vector2(333, 163)
-is_controlled = true
