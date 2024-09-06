@@ -59,5 +59,6 @@ animations = [{
 
 [node name="CmdVertex" type="AnimatedSprite2D"]
 modulate = Color(0.5032, 0.65712, 0.74, 0.784314)
+z_index = 1
 scale = Vector2(0.17, 0.17)
 sprite_frames = SubResource("SpriteFrames_7aykh")
