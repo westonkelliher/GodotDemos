@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckyu7uovsxcpq"]
+[gd_scene load_steps=7 format=3 uid="uid://ckyu7uovsxcpq"]
 
-[ext_resource type="Texture2D" uid="uid://c27kfv7lajcpx" path="res://b_hand_open.png" id="1_yob5d"]
-[ext_resource type="Texture2D" uid="uid://cylgsyecioafa" path="res://b_hand_grab.png" id="2_djxsl"]
+[ext_resource type="Script" path="res://hand.gd" id="1_leyk5"]
+[ext_resource type="Texture2D" uid="uid://c27kfv7lajcpx" path="res://images/b_hand_open.png" id="1_yob5d"]
+[ext_resource type="Texture2D" uid="uid://x6ajgq0wr0dl" path="res://images/b_hand_grab.png" id="2_djxsl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_koapl"]
 atlas = ExtResource("1_yob5d")
@@ -26,6 +27,7 @@ animations = [{
 }]
 
 [node name="Hand" type="Node2D"]
+script = ExtResource("1_leyk5")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.2, 0.2)

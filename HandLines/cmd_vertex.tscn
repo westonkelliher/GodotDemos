@@ -1,0 +1,63 @@
+[gd_scene load_steps=14 format=3 uid="uid://fi6na1t0qfm2"]
+
+[ext_resource type="Texture2D" uid="uid://drd8j52ema3ii" path="res://images/cmd_interact_thic.png" id="1_ks1qb"]
+[ext_resource type="Texture2D" uid="uid://bao0e0pvbeio6" path="res://images/cmd_interact.png" id="1_x3n32"]
+[ext_resource type="Texture2D" uid="uid://trtlogbn7oh0" path="res://images/cmd_pickup_thic.png" id="2_mmfqq"]
+[ext_resource type="Texture2D" uid="uid://2jca0kw3qsxm" path="res://images/cmd_pickup.png" id="2_yl622"]
+[ext_resource type="Texture2D" uid="uid://b064q3q2cmsyx" path="res://images/cmd_putdown.png" id="3_gn6rj"]
+[ext_resource type="Texture2D" uid="uid://io1y4ldr3c5f" path="res://images/cmd_putdown_thic.png" id="3_li4am"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kabe2"]
+atlas = ExtResource("1_x3n32")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqbh5"]
+atlas = ExtResource("1_ks1qb")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7wfm"]
+atlas = ExtResource("2_mmfqq")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l22wb"]
+atlas = ExtResource("3_li4am")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r8sg"]
+atlas = ExtResource("2_yl622")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ey2ew"]
+atlas = ExtResource("3_gn6rj")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7aykh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kabe2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqbh5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7wfm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l22wb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r8sg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ey2ew")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CmdVertex" type="AnimatedSprite2D"]
+modulate = Color(0.5032, 0.65712, 0.74, 0.784314)
+scale = Vector2(0.17, 0.17)
+sprite_frames = SubResource("SpriteFrames_7aykh")

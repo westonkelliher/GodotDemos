@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cylgsyecioafa"
-path="res://.godot/imported/b_hand_grab.png-32c51fda5c507d7514837178dbb8ee12.ctex"
+uid="uid://trtlogbn7oh0"
+path="res://.godot/imported/cmd_pickup_thic.png-623d5dca2f376dd55db7b852b8b20047.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://b_hand_grab.png"
-dest_files=["res://.godot/imported/b_hand_grab.png-32c51fda5c507d7514837178dbb8ee12.ctex"]
+source_file="res://images/cmd_pickup_thic.png"
+dest_files=["res://.godot/imported/cmd_pickup_thic.png-623d5dca2f376dd55db7b852b8b20047.ctex"]
 
 [params]
 
