@@ -51,17 +51,17 @@ func transmute(t: String) -> void:
 		nomer = "A"
 		ring_func = "effect_A"
 		$Sprite.texture = preload("res://images/circle.png")
-		$Sprite.modulate = Color(0.2, 0.7, 0.8)
+		$Sprite.modulate = Color(0.2, 0.7, 1.0)
 	elif t == "B":
 		nomer = "B"
 		ring_func = "effect_B"
 		$Sprite.texture = preload("res://images/square.png")
-		$Sprite.modulate = Color(0.4, 0.8, 0.5)
+		$Sprite.modulate = Color(0.4, 1.0, 0.5)
 	elif t == "C":
 		nomer = "C"
 		ring_func = "effect_C"
 		$Sprite.texture = preload("res://images/triangle.png")
-		$Sprite.modulate = Color(0.8, 0.7, 0.1)
+		$Sprite.modulate = Color(1.0, 0.7, 0.4)
 
 func pop_bit() -> void:
 	var ring := preload("res://ring.tscn").instantiate()

@@ -10,7 +10,7 @@ size = Vector2(1200, 40)
 script = ExtResource("1_7nept")
 
 [node name="Panel" type="Panel" parent="."]
-modulate = Color(1, 1, 1, 0.52549)
+modulate = Color(1, 1, 1, 0.784314)
 offset_left = 144.0
 offset_top = 23.0
 offset_right = 872.0

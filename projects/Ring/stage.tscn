@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cf167h7tu8uag"]
+[gd_scene load_steps=4 format=3 uid="uid://cf167h7tu8uag"]
 
 [ext_resource type="Script" path="res://stage.gd" id="1_idrg0"]
 [ext_resource type="Texture2D" uid="uid://b4vvxatcur10i" path="res://README.png" id="2_0ni6l"]
-[ext_resource type="PackedScene" uid="uid://bbfb0878hcuve" path="res://Bits/c_bit.tscn" id="3_6dkvf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_esvqq"]
 size = Vector2(1176, 665)
@@ -11,7 +10,7 @@ size = Vector2(1176, 665)
 script = ExtResource("1_idrg0")
 
 [node name="Panel" type="Panel" parent="."]
-modulate = Color(1, 1, 1, 0.670588)
+modulate = Color(1, 1, 1, 0.784314)
 offset_left = 125.0
 offset_top = 38.0
 offset_right = 1028.0
@@ -23,14 +22,12 @@ texture = ExtResource("2_0ni6l")
 centered = false
 
 [node name="SpawnArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea"]
 position = Vector2(578, 322.5)
 shape = SubResource("RectangleShape2D_esvqq")
 
 [node name="Bits" type="Node" parent="."]
-
-[node name="C-Bit" parent="Bits" instance=ExtResource("3_6dkvf")]
-position = Vector2(440, 291)
 
 [connection signal="input_event" from="SpawnArea" to="." method="_on_spawn_area_input_event"]

@@ -140,8 +140,8 @@ func _physics_process(delta: float) -> void:
 	# airfoil lift
 	var lift_normal := basis * Vector3.UP
 	var beak_normal := basis * Vector3.FORWARD
-	var lift_mult := velocity.dot(beak_normal) * FOIL_LIFT_MULT * torso_tilt * cos(flap_angle)
-	velocity -= velocity.normalized() * lift_mult * delta * 0.8 # 0.8 means we get 0.2 of created energy
+	var lift_mult: float = velocity.dot(beak_normal) * FOIL_LIFT_MULT * torso_tilt * abs(cos(flap_angle))
+	velocity -= velocity.normalized() * lift_mult * delta * 0.4 # 0.52 means we get 0.6 of added energy
 	if flap_speed < 0.1:
 		velocity += lift_normal * lift_mult * delta
 	#

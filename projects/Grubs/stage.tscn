@@ -1,16 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlybnuprmyd8g"]
+[gd_scene load_steps=5 format=3 uid="uid://dlybnuprmyd8g"]
 
 [ext_resource type="Texture2D" uid="uid://dqfojyyg8k2xb" path="res://README.png" id="1_vxkk7"]
 [ext_resource type="Texture2D" uid="uid://c1emmnt275bta" path="res://bg.png" id="1_x1psv"]
 [ext_resource type="PackedScene" uid="uid://bibs5qqp6br7w" path="res://grub.tscn" id="2_ffvwa"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_einyy"]
+
 [node name="Stage" type="Node2D"]
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 223.0
+modulate = Color(1, 1, 1, 0.941176)
+offset_left = 78.0
 offset_top = 34.0
-offset_right = 891.0
+offset_right = 746.0
 offset_bottom = 281.0
+scale = Vector2(1.5, 1.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_einyy")
 
 [node name="README" type="Sprite2D" parent="Panel"]
 position = Vector2(331, 121)

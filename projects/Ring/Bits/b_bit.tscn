@@ -8,5 +8,5 @@ nomer = "B"
 ring_func = "effect_B"
 
 [node name="Sprite" parent="." index="0"]
-modulate = Color(0.4, 0.8, 0.501961, 1)
+modulate = Color(0.4, 1, 0.502, 1)
 texture = ExtResource("2_e1nni")

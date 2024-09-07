@@ -8,7 +8,10 @@ nomer = "C"
 ring_func = "effect_C"
 
 [node name="Sprite" parent="." index="0"]
-modulate = Color(0.8, 0.701961, 0.101961, 1)
+modulate = Color(1, 0.7, 0.4, 1)
 position = Vector2(2, 0)
 rotation = 0.261799
 texture = ExtResource("2_hppgf")
+
+[node name="Area" parent="." index="1"]
+visible = false

@@ -7,4 +7,4 @@ nomer = "A"
 ring_func = "effect_A"
 
 [node name="Sprite" parent="." index="0"]
-modulate = Color(0.2, 0.701961, 0.8, 1)
+modulate = Color(0.2, 0.702, 1, 1)

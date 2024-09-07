@@ -119,25 +119,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -781.591, 0.0499878, 640.609)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2607.73, 0.0499878, -1730.59)
 
 [node name="Pillar" parent="Objects" instance=ExtResource("6_3pknp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.7211, 0, 0)
+transform = Transform3D(2.18724, 0, 0, 0, 1.80401, 0, 0, 0, 1, 140.543, -0.398505, 0)
 
 [node name="Pillar2" parent="Objects" instance=ExtResource("6_3pknp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.8487, 5.54625, 0)
+transform = Transform3D(2.18724, 0, 0, 0, 1.80401, 0, 0, 0, 1, 183.939, 9.60701, -1.55844)
 
 [node name="Pillar3" parent="Objects" instance=ExtResource("6_3pknp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 102.844, 0, 0)
+transform = Transform3D(2.18724, 0, 0, 0, 1.80401, 0, 0, 0, 1, 307.532, -0.398505, 0)
 
 [node name="Pillar4" parent="Objects" instance=ExtResource("6_3pknp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.3527, 0, 61.3051)
 
 [node name="Pillar5" parent="Objects" instance=ExtResource("6_3pknp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110.602, 4.91297, 0)
+transform = Transform3D(2.18724, 0, 0, 0, 1.80401, 0, 0, 0, 1, 344.417, 8.46457, -1.55844)
 
 [node name="Pillar6" parent="Objects" instance=ExtResource("6_3pknp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94.3504, 5.55059, 0)
+transform = Transform3D(2.18724, 0, 0, 0, 1.80401, 0, 0, 0, 1, 267.15, 9.61484, -1.55844)
 
 [node name="Pillar7" parent="Objects" instance=ExtResource("6_3pknp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.1476, 0, 0)
+transform = Transform3D(2.18724, 0, 0, 0, 1.80401, 0, 0, 0, 1, 223.396, -0.398505, 0)
 
 [node name="Pillar8" parent="Objects" instance=ExtResource("6_3pknp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.57, 5.54625, -154.274)
