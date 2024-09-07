@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvk6o3ljj26th"]
+[gd_scene load_steps=6 format=3 uid="uid://bvk6o3ljj26th"]
 
 [ext_resource type="PackedScene" uid="uid://ckyu7uovsxcpq" path="res://scenes/hand.tscn" id="1_6ssg7"]
 [ext_resource type="Script" path="res://scripts/stage.gd" id="1_djgvj"]
 [ext_resource type="PackedScene" uid="uid://wgaa6m23f3ov" path="res://scenes/my_line.tscn" id="3_havdq"]
 [ext_resource type="PackedScene" uid="uid://um30gg80awye" path="res://scenes/object.tscn" id="4_fsewg"]
+[ext_resource type="Texture2D" uid="uid://q2xju618acq6" path="res://README.png" id="5_vc7y1"]
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_djgvj")
@@ -47,6 +48,19 @@ position = Vector2(168, 410)
 
 [node name="Object8" parent="Items" instance=ExtResource("4_fsewg")]
 position = Vector2(168, 254)
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.788235)
+z_index = -1
+offset_left = 388.0
+offset_top = 323.0
+offset_right = 1517.0
+offset_bottom = 883.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel"]
+position = Vector2(54, 35)
+texture = ExtResource("5_vc7y1")
+centered = false
 
 [connection signal="finished_cmd" from="Hand1" to="." method="_on_hand1_finished_cmd"]
 [connection signal="finished_cmd" from="Hand2" to="." method="_on_hand2_finished_cmd"]

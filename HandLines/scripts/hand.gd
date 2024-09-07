@@ -21,7 +21,7 @@ var hovered_objects: Array[Bip] = []
 
 var interact_object: Bip = null
 
-const SPEED := 130.0
+const SPEED := 150.0
 
 func _process(delta: float) -> void:
 	# no command
