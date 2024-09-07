@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://54nl2o3ys8dw"]
 
-[ext_resource type="Script" path="res://LineTest.gd" id="1_v6o11"]
+[ext_resource type="Script" path="res://scripts/LineTest.gd" id="1_v6o11"]
 
 [sub_resource type="Curve2D" id="Curve2D_8kehn"]
 _data = {

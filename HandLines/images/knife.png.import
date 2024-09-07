@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0gu7tjw1jts4"
-path="res://.godot/imported/hand_open.png-e31ebe5af82eef0d7b28e745fd8b74e3.ctex"
+uid="uid://dlmc13ox2r4du"
+path="res://.godot/imported/knife.png-53f67814702ff72b3f0670bd85316fce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://hand_open.png"
-dest_files=["res://.godot/imported/hand_open.png-e31ebe5af82eef0d7b28e745fd8b74e3.ctex"]
+source_file="res://images/knife.png"
+dest_files=["res://.godot/imported/knife.png-53f67814702ff72b3f0670bd85316fce.ctex"]
 
 [params]
 

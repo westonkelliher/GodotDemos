@@ -1,50 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://bvk6o3ljj26th"]
+[gd_scene load_steps=5 format=3 uid="uid://bvk6o3ljj26th"]
 
-[ext_resource type="PackedScene" uid="uid://ckyu7uovsxcpq" path="res://hand.tscn" id="1_6ssg7"]
-[ext_resource type="Script" path="res://stage.gd" id="1_djgvj"]
-[ext_resource type="PackedScene" uid="uid://wgaa6m23f3ov" path="res://my_line.tscn" id="3_havdq"]
-[ext_resource type="Texture2D" uid="uid://blpwtfv4dbd2r" path="res://images/ball.png" id="4_c8sea"]
-[ext_resource type="Texture2D" uid="uid://b3dqkm7ye776t" path="res://images/patty.png" id="5_uff3u"]
-[ext_resource type="Texture2D" uid="uid://c30j3vr2kgcxb" path="res://images/cake.png" id="6_41c44"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bqlby"]
-atlas = ExtResource("4_c8sea")
-region = Rect2(0, 0, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ergta"]
-atlas = ExtResource("5_uff3u")
-region = Rect2(0, 0, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ijvyv"]
-atlas = ExtResource("6_41c44")
-region = Rect2(0, 0, 400, 400)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_bgjxr"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bqlby")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ergta")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ijvyv")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="PackedScene" uid="uid://ckyu7uovsxcpq" path="res://scenes/hand.tscn" id="1_6ssg7"]
+[ext_resource type="Script" path="res://scripts/stage.gd" id="1_djgvj"]
+[ext_resource type="PackedScene" uid="uid://wgaa6m23f3ov" path="res://scenes/my_line.tscn" id="3_havdq"]
+[ext_resource type="PackedScene" uid="uid://um30gg80awye" path="res://scenes/object.tscn" id="4_fsewg"]
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_djgvj")
 
 [node name="Hand1" parent="." instance=ExtResource("1_6ssg7")]
-z_index = 2
 position = Vector2(612, 91)
 
 [node name="Hand2" parent="." instance=ExtResource("1_6ssg7")]
-z_index = 2
 position = Vector2(939, 90)
 
 [node name="TempLine" parent="." instance=ExtResource("3_havdq")]
@@ -53,27 +20,33 @@ position = Vector2(939, 90)
 
 [node name="Items" type="Node2D" parent="."]
 
-[node name="berl" type="AnimatedSprite2D" parent="Items"]
-position = Vector2(135, 412)
-scale = Vector2(0.25, 0.25)
-sprite_frames = SubResource("SpriteFrames_bgjxr")
+[node name="Object" parent="Items" instance=ExtResource("4_fsewg")]
+position = Vector2(331, 411)
 
-[node name="berl2" type="AnimatedSprite2D" parent="Items"]
-position = Vector2(182, 513)
-scale = Vector2(0.25, 0.25)
-sprite_frames = SubResource("SpriteFrames_bgjxr")
+[node name="Object2" parent="Items" instance=ExtResource("4_fsewg")]
+position = Vector2(331, 256)
 
-[node name="berl3" type="AnimatedSprite2D" parent="Items"]
-position = Vector2(471, 474)
-scale = Vector2(0.25, 0.25)
-sprite_frames = SubResource("SpriteFrames_bgjxr")
-frame = 1
+[node name="Object3" parent="Items" instance=ExtResource("4_fsewg")]
+position = Vector2(169, 573)
+type = 1
 
-[node name="berl4" type="AnimatedSprite2D" parent="Items"]
-position = Vector2(744, 476)
-scale = Vector2(0.25, 0.25)
-sprite_frames = SubResource("SpriteFrames_bgjxr")
-frame = 2
+[node name="Object4" parent="Items" instance=ExtResource("4_fsewg")]
+position = Vector2(332, 575)
+type = 2
+
+[node name="Object5" parent="Items" instance=ExtResource("4_fsewg")]
+position = Vector2(301, 104)
+type = 3
+
+[node name="Object6" parent="Items" instance=ExtResource("4_fsewg")]
+position = Vector2(974, 544)
+type = 3
+
+[node name="Object7" parent="Items" instance=ExtResource("4_fsewg")]
+position = Vector2(168, 410)
+
+[node name="Object8" parent="Items" instance=ExtResource("4_fsewg")]
+position = Vector2(168, 254)
 
 [connection signal="finished_cmd" from="Hand1" to="." method="_on_hand1_finished_cmd"]
 [connection signal="finished_cmd" from="Hand2" to="." method="_on_hand2_finished_cmd"]

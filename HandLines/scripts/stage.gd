@@ -9,12 +9,15 @@ var cmd_queue: Array[Cmd] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	current_cmd = preload("res://cmd.tscn").instantiate()
+	current_cmd = preload("res://scenes/cmd.tscn").instantiate()
 	$Cmds.add_child(current_cmd)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("move"):
+		add_cmd_vertex(mouse_position(), Cmd.SubcType.Move, connecting)
+		connecting = true
 	if Input.is_action_just_pressed("interact"):
 		add_cmd_vertex(mouse_position(), Cmd.SubcType.Interact, connecting)
 		connecting = true
@@ -33,7 +36,7 @@ func _process(delta: float) -> void:
 		else:
 			cmd_queue.append(current_cmd)
 		#
-		current_cmd = preload("res://cmd.tscn").instantiate()
+		current_cmd = preload("res://scenes/cmd.tscn").instantiate()
 		$Cmds.add_child(current_cmd)
 		connecting = false
 		
@@ -49,14 +52,14 @@ func mouse_position() -> Vector2:
 
 func add_cmd_vertex(pos: Vector2, type: Cmd.SubcType, with_line: bool) -> void:
 	# vertex
-	var x := preload("res://cmd_vertex.tscn").instantiate()
+	var x := preload("res://scenes/cmd_vertex.tscn").instantiate()
 	x.frame = type
 	x.position = pos
 	current_cmd.add_subcmd(type, pos)
 	current_cmd.add_node(x)
 	# line
 	if with_line:
-		var line := preload("res://my_line.tscn").instantiate()
+		var line := preload("res://scenes/my_line.tscn").instantiate()
 		line.set_points(last_vert_pos, pos)
 		current_cmd.add_node(line)
 	last_vert_pos = pos
