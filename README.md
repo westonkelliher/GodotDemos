@@ -14,7 +14,7 @@ game. Because these demos are pretty incomplete projects, the demos include a
 description of the idea behind the demo and how it might be implemented in a 
 full game.
 
-Once you've checked out each demo, open up top_picks.txt and indicate which 
+Once you've checked out each demo, open up `top_picks.txt` and indicate which 
 four you choose. For the four you choose also indicate whether you liked the 
 actual implementation or you just liked the idea. (You may also indicate a 
 weight for your choices as shown in the example below if you'd like.) Then take 
