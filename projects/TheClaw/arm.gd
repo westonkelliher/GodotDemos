@@ -23,9 +23,9 @@ func _physics_process(delta: float) -> void:
 	var R_t1 := Input.get_action_raw_strength("RT1")
 	#
 	var L_stick := correct_and_convert_stick(L_l, L_r, L_u, L_d)
-	var L_trig := correct_and_convert_trigger(L_t0, L_t1)
+	var L_trig :=  Input.get_action_raw_strength("LT0") #correct_and_convert_trigger(L_t0, L_t1)
 	var R_stick := correct_and_convert_stick(R_l, R_r, R_u, R_d)
-	var R_trig := correct_and_convert_trigger(R_t0, R_t1)
+	var R_trig :=  Input.get_action_raw_strength("RT0") #correct_and_convert_trigger(R_t0, R_t1)
 	#
 	$BaseArm.handle_input(L_stick, L_trig, delta)
 	$BaseArm/ForeArm.handle_input(R_stick, R_trig, delta)
