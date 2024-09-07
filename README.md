@@ -40,3 +40,5 @@ If you choose to add weights to your choices, indicate a demo you liked more
 with a higher number. (Your weights will be normalized so don't worry about 
 using large numbers or small numbers. If you liked A twice as much as B, give 
 A a weight twice as large as B.)
+
+If you have any thoughts or comments, please include that as well. Thanks!
