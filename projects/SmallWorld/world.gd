@@ -1,7 +1,11 @@
 extends Node3D
 
 
-var offset = Vector3(0, 6, 6)
+var offset = Vector3(0, 4, 6)
+
+var ttime := 0.0
+var won := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#offset = position*10
@@ -19,3 +23,14 @@ func _process(delta: float) -> void:
 	$Camera3D.set_up(cam_up)
 	$Camera3D.set_muse($Player.position)
 	
+	#$Floor.rotate(Vector3.UP, 0.2*delta)
+	
+	if not won:
+		ttime += delta
+		$Control/Label.text = str(int(ttime))
+
+
+func _on_plaatform_win() -> void:
+	won = true
+	$Control/Label.modulate = Color(0.75, 1.0, 0.75)
+	$Control2.visible = true

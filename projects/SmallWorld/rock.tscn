@@ -1,19 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://nu4ymtwinci2"]
+[gd_scene load_steps=7 format=3 uid="uid://nu4ymtwinci2"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_cma0h"]
+[ext_resource type="Script" path="res://rock.gd" id="1_jmfkk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m6dw1"]
 frequency = 0.0373
 fractal_lacunarity = 1.37
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r6j3o"]
-noise = SubResource("FastNoiseLite_cma0h")
+noise = SubResource("FastNoiseLite_m6dw1")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ifq7m"]
-albedo_color = Color(0.654902, 0.662745, 0.780392, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j2vy3"]
+albedo_color = Color(0.823529, 0.823529, 0.772549, 1)
 normal_enabled = true
 normal_texture = SubResource("NoiseTexture2D_r6j3o")
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_08w1n"]
-material = SubResource("StandardMaterial3D_ifq7m")
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ggjho"]
+material = SubResource("StandardMaterial3D_j2vy3")
 radius = 1.0
 height = 2.4
 
@@ -22,9 +24,10 @@ radius = 1.0
 height = 2.4
 
 [node name="Rock" type="StaticBody3D"]
+script = ExtResource("1_jmfkk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_08w1n")
+mesh = SubResource("CapsuleMesh_ggjho")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_xktbk")

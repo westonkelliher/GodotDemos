@@ -1,19 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://cylwrkjur2rdw"]
+[gd_scene load_steps=9 format=3 uid="uid://cylwrkjur2rdw"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_vc8e8"]
 [ext_resource type="BoxMesh" uid="uid://c67hvj11nvhrw" path="res://lilbox.tres" id="2_ijx21"]
+[ext_resource type="Texture2D" uid="uid://dcla56hnvch3q" path="res://icon.svg" id="3_b112h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3loex"]
-height = 2.08996
+height = 2.17023
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_24efn"]
 
 [sub_resource type="TorusMesh" id="TorusMesh_apuik"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_yq0sa"]
+atlas = ExtResource("3_b112h")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rpnct"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yq0sa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody3D"]
+floor_max_angle = 1.5708
 script = ExtResource("1_vc8e8")
 
 [node name="Shape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0700119, 0)
 shape = SubResource("CapsuleShape3D_3loex")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -47,3 +65,60 @@ target_position = Vector3(0, 0, -1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TopSpot/Ray3"]
 mesh = ExtResource("2_ijx21")
+
+[node name="JumpIndicators" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.03
+offset_top = 30.0
+
+[node name="1" type="AnimatedSprite2D" parent="JumpIndicators"]
+position = Vector2(-100, 10)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_rpnct")
+
+[node name="2" type="AnimatedSprite2D" parent="JumpIndicators"]
+position = Vector2(-50, 10)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_rpnct")
+
+[node name="3" type="AnimatedSprite2D" parent="JumpIndicators"]
+position = Vector2(0, 10)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_rpnct")
+
+[node name="4" type="AnimatedSprite2D" parent="JumpIndicators"]
+position = Vector2(50, 10)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_rpnct")
+
+[node name="5" type="AnimatedSprite2D" parent="JumpIndicators"]
+position = Vector2(100, 10)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_rpnct")
+
+[node name="6" type="AnimatedSprite2D" parent="JumpIndicators"]
+position = Vector2(150, 10)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_rpnct")
+
+[node name="7" type="AnimatedSprite2D" parent="JumpIndicators"]
+position = Vector2(200, 10)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_rpnct")
+
+[node name="8" type="AnimatedSprite2D" parent="JumpIndicators"]
+position = Vector2(250, 10)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_rpnct")
+
+[node name="9" type="AnimatedSprite2D" parent="JumpIndicators"]
+position = Vector2(300, 10)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_rpnct")
+
+[node name="10" type="AnimatedSprite2D" parent="JumpIndicators"]
+position = Vector2(350, 10)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_rpnct")

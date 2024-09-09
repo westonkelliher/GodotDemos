@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4dexvgigs6j6"]
+
+[ext_resource type="Script" path="res://power_up.gd" id="1_s50gd"]
+[ext_resource type="Texture2D" uid="uid://dcla56hnvch3q" path="res://icon.svg" id="2_eog1u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fee7b"]
+albedo_texture = ExtResource("2_eog1u")
+emission_enabled = true
+emission_energy_multiplier = 1.1
+emission_texture = ExtResource("2_eog1u")
+
+[sub_resource type="BoxMesh" id="BoxMesh_tfv0h"]
+material = SubResource("StandardMaterial3D_fee7b")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bm1kp"]
+radius = 1.2
+
+[node name="PowerUp" type="Node3D"]
+script = ExtResource("1_s50gd")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_tfv0h")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.988532, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_bm1kp")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=3 uid="uid://dsbmaan81i0hh"]
+
+[ext_resource type="Script" path="res://plaatform.gd" id="1_ymh8s"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vwf2s"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ly172"]
+noise_type = 3
+frequency = 0.1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yholg"]
+noise = SubResource("FastNoiseLite_ly172")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l23j4"]
+albedo_color = Color(0.447823, 0.647938, 0.320942, 1)
+emission_texture = SubResource("NoiseTexture2D_vwf2s")
+normal_enabled = true
+normal_scale = 0.2
+normal_texture = SubResource("NoiseTexture2D_yholg")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xx4ns"]
+material = SubResource("StandardMaterial3D_l23j4")
+top_radius = 4.0
+bottom_radius = 4.0
+height = 0.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qlqa8"]
+height = 0.5
+radius = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wj2b3"]
+albedo_color = Color(0.239216, 0.509804, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.588235, 0.945098, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_blaol"]
+material = SubResource("StandardMaterial3D_wj2b3")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ltmkb"]
+radius = 0.7
+
+[node name="plaatform" type="StaticBody3D"]
+script = ExtResource("1_ymh8s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_xx4ns")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_qlqa8")
+
+[node name="Winner" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("SphereMesh_blaol")
+
+[node name="Area3D" type="Area3D" parent="Winner"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Winner/Area3D"]
+shape = SubResource("SphereShape3D_ltmkb")
+
+[connection signal="body_entered" from="Winner/Area3D" to="." method="_on_area_3d_body_entered"]
